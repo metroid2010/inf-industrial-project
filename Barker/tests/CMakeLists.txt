@@ -1,0 +1,24 @@
+add_executable(test_barker_user test_barker_user.cpp)
+target_link_libraries(test_barker_user gtest_main BarkerLib)
+add_test(NAME test_barker_user COMMAND test_barker_user)
+
+# Comenta este bloque para ignorar este test
+add_executable(test_barker_manager_basic test_barker_manager_basic.cpp)
+target_link_libraries(test_barker_manager_basic gtest_main BarkerLib)
+add_test(NAME test_barker_manager_basic COMMAND test_barker_manager_basic)
+
+# Comenta este bloque para ignorar este test
+#add_executable(test_barker_publication test_barker_publication.cpp)
+#target_link_libraries(test_barker_publication gtest_main BarkerLib)
+#add_test(NAME test_barker_publication COMMAND test_barker_publication)
+
+# Comenta este bloque para ignorar este test
+#add_executable(test_barker_publication_integration test_barker_publication_integration.cpp)
+#target_link_libraries(test_barker_publication_integration gtest_main BarkerLib)
+#add_test(NAME test_barker_publication_integration COMMAND test_barker_publication_integration)
+
+# Comenta este bloque para ignorar este test
+#add_executable(test_barker_load_save_to_file test_barker_load_save_to_file.cpp)
+#target_link_libraries(test_barker_load_save_to_file gtest_main BarkerLib)
+#add_test(NAME test_barker_load_save_to_file COMMAND test_barker_load_save_to_file)
+#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/test_data.dat ${CMAKE_CURRENT_BINARY_DIR}/test_data.dat COPYONLY)
