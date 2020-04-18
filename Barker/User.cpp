@@ -10,6 +10,6 @@
 #include "User.hpp"
 
 
-User::User(string email, string password, string username, string bio) : PublicUserData(email, password), PrivateUserData(username, bio) {
+User::User(string email, string password, string username, string bio) : PrivateUserData(email, password), PublicUserData(username, bio) {
 
 }

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libBarkerLib.a  CMakeFiles/BarkerLib.dir/User.cpp.o CMakeFiles/BarkerLib.dir/PublicUserData.cpp.o CMakeFiles/BarkerLib.dir/PrivateUserData.cpp.o CMakeFiles/BarkerLib.dir/Manager.cpp.o CMakeFiles/BarkerLib.dir/Publication.cpp.o CMakeFiles/BarkerLib.dir/Bark.cpp.o CMakeFiles/BarkerLib.dir/Rebark.cpp.o CMakeFiles/BarkerLib.dir/Reply.cpp.o
+/usr/bin/ranlib libBarkerLib.a

@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp
+iostream
+-
+
+/home/rober/src/inf-industrial-project/Barker/PublicUserData.hpp
+iostream
+-
+vector
+-
+Publication.hpp
+/home/rober/src/inf-industrial-project/Barker/Publication.hpp
+
+/home/rober/src/inf-industrial-project/Barker/Publication.hpp
+
+/home/rober/src/inf-industrial-project/Barker/User.cpp
+User.hpp
+/home/rober/src/inf-industrial-project/Barker/User.hpp
+
+/home/rober/src/inf-industrial-project/Barker/User.hpp
+iostream
+-
+PublicUserData.hpp
+/home/rober/src/inf-industrial-project/Barker/PublicUserData.hpp
+PrivateUserData.hpp
+/home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp
+
