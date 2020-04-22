@@ -1,0 +1,1 @@
+/usr/bin/g++  -g  -rdynamic CMakeFiles/test_barker_manager_basic.dir/test_barker_manager_basic.cpp.o  -o test_barker_manager_basic ../lib/libgtest_maind.a ../libBarkerLib.a ../lib/libgtestd.a -lpthread 

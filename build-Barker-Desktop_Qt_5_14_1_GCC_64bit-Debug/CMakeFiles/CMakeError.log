@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1e6ff/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1e6ff.dir/build.make CMakeFiles/cmTC_1e6ff.dir/build
+make[1]: se entra en el directorio '/home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1e6ff.dir/CheckSymbolExists.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTC_1e6ff.dir/CheckSymbolExists.c.o   -c "/home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
+Linking C executable cmTC_1e6ff
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1e6ff.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_1e6ff.dir/CheckSymbolExists.c.o  -o cmTC_1e6ff 
+CMakeFiles/cmTC_1e6ff.dir/CheckSymbolExists.c.o: En la función `main':
+CheckSymbolExists.c:(.text+0x1b): referencia a `pthread_create' sin definir
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1e6ff.dir/build.make:97: recipe for target 'cmTC_1e6ff' failed
+make[1]: *** [cmTC_1e6ff] Error 1
+make[1]: se sale del directorio '/home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1e6ff/fast' failed
+make: *** [cmTC_1e6ff/fast] Error 2
+
+File /home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_66f44/fast"
+/usr/bin/make -f CMakeFiles/cmTC_66f44.dir/build.make CMakeFiles/cmTC_66f44.dir/build
+make[1]: se entra en el directorio '/home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_66f44.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_66f44.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_66f44
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_66f44.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_66f44.dir/CheckFunctionExists.c.o  -o cmTC_66f44 -lpthreads 
+/usr/bin/ld: no se puede encontrar -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_66f44.dir/build.make:97: recipe for target 'cmTC_66f44' failed
+make[1]: *** [cmTC_66f44] Error 1
+make[1]: se sale del directorio '/home/esther/Escritorio/Informática Industrial/PROYECTO/Proyecto1/build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_66f44/fast' failed
+make: *** [cmTC_66f44/fast] Error 2
+
+
