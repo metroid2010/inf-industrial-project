@@ -11,6 +11,9 @@
 #include "PublicUserData.hpp"
 #include "PrivateUserData.hpp"
 
+#ifndef USER_HPP
+#define USER_HPP
+
 using namespace std;
 
 class User : public PrivateUserData, public PublicUserData {
@@ -22,3 +25,5 @@ public:
     User(string email, string password, string username, string bio);
 
 };
+
+#endif

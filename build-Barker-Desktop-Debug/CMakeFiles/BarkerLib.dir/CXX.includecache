@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/home/rober/src/inf-industrial-project/Barker/Manager.cpp
+Manager.hpp
+/home/rober/src/inf-industrial-project/Barker/Manager.hpp
+
+/home/rober/src/inf-industrial-project/Barker/Manager.hpp
+iostream
+-
+vector
+-
+User.hpp
+/home/rober/src/inf-industrial-project/Barker/User.hpp
+
 /home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp
 iostream
 -
@@ -19,10 +31,6 @@ Publication.hpp
 /home/rober/src/inf-industrial-project/Barker/Publication.hpp
 
 /home/rober/src/inf-industrial-project/Barker/Publication.hpp
-
-/home/rober/src/inf-industrial-project/Barker/User.cpp
-User.hpp
-/home/rober/src/inf-industrial-project/Barker/User.hpp
 
 /home/rober/src/inf-industrial-project/Barker/User.hpp
 iostream

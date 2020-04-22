@@ -7,3 +7,7 @@
 *
 **/
 
+#ifndef REBARK_HPP
+#define REBARK_HPP
+
+#endif

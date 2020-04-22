@@ -40,6 +40,7 @@ void PublicUserData::increaseFollowers() {
 }
 
 void PublicUserData::decreaseFollowers() {
+    // check to avoid _followers being lower than zero
     if( (_followers) <= 1 ){
         _followers = 0;
     } else {

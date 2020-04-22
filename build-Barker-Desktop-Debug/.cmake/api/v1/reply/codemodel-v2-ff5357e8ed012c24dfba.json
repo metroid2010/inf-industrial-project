@@ -86,7 +86,8 @@
 					"source" : "tests",
 					"targetIndexes" : 
 					[
-						6
+						6,
+						7
 					]
 				}
 			],
@@ -108,7 +109,8 @@
 					[
 						0,
 						1,
-						6
+						6,
+						7
 					]
 				},
 				{
@@ -197,6 +199,13 @@
 					"jsonFile" : "target-gtest_main-Debug-a42fbe1ce4f48309534c.json",
 					"name" : "gtest_main",
 					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "test_barker_manager_basic::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-test_barker_manager_basic-Debug-c6733d9ec4e186267d86.json",
+					"name" : "test_barker_manager_basic",
+					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,

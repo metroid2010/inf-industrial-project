@@ -255,6 +255,19 @@ gtest/fast:
 .PHONY : gtest/fast
 
 #=============================================================================
+# Target rules for targets named test_barker_manager_basic
+
+# Build rule for target.
+test_barker_manager_basic: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_barker_manager_basic
+.PHONY : test_barker_manager_basic
+
+# fast build rule for target.
+test_barker_manager_basic/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/build
+.PHONY : test_barker_manager_basic/fast
+
+#=============================================================================
 # Target rules for targets named test_barker_user
 
 # Build rule for target.
@@ -528,6 +541,7 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... test_barker_manager_basic"
 	@echo "... test_barker_user"
 	@echo "... Bark.o"
 	@echo "... Bark.i"

@@ -4,6 +4,11 @@
 CMakeFiles/BarkerLib.dir/Bark.cpp.o: /home/rober/src/inf-industrial-project/Barker/Bark.cpp
 
 CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/Manager.cpp
+CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/Manager.hpp
+CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp
+CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/PublicUserData.hpp
+CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/Publication.hpp
+CMakeFiles/BarkerLib.dir/Manager.cpp.o: /home/rober/src/inf-industrial-project/Barker/User.hpp
 
 CMakeFiles/BarkerLib.dir/PrivateUserData.cpp.o: /home/rober/src/inf-industrial-project/Barker/PrivateUserData.cpp
 CMakeFiles/BarkerLib.dir/PrivateUserData.cpp.o: /home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp

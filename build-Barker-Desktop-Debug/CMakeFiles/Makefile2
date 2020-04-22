@@ -156,6 +156,7 @@ googletest-build/googletest/clean: googletest-build/googletest/CMakeFiles/gtest.
 # Directory level rules for directory tests
 
 # Recursive "all" directory target.
+tests/all: tests/CMakeFiles/test_barker_manager_basic.dir/all
 tests/all: tests/CMakeFiles/test_barker_user.dir/all
 
 .PHONY : tests/all
@@ -166,6 +167,7 @@ tests/preinstall:
 .PHONY : tests/preinstall
 
 # Recursive "clean" directory target.
+tests/clean: tests/CMakeFiles/test_barker_manager_basic.dir/clean
 tests/clean: tests/CMakeFiles/test_barker_user.dir/clean
 
 .PHONY : tests/clean
@@ -334,6 +336,35 @@ googletest-build/googletest/CMakeFiles/gtest.dir/clean:
 .PHONY : googletest-build/googletest/CMakeFiles/gtest.dir/clean
 
 #=============================================================================
+# Target rules for target tests/CMakeFiles/test_barker_manager_basic.dir
+
+# All Build rule for target.
+tests/CMakeFiles/test_barker_manager_basic.dir/all: CMakeFiles/BarkerLib.dir/all
+tests/CMakeFiles/test_barker_manager_basic.dir/all: googletest-build/googletest/CMakeFiles/gtest_main.dir/all
+tests/CMakeFiles/test_barker_manager_basic.dir/all: googletest-build/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/depend
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug/CMakeFiles --progress-num=20,21 "Built target test_barker_manager_basic"
+.PHONY : tests/CMakeFiles/test_barker_manager_basic.dir/all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/test_barker_manager_basic.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug/CMakeFiles 15
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_barker_manager_basic.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug/CMakeFiles 0
+.PHONY : tests/CMakeFiles/test_barker_manager_basic.dir/rule
+
+# Convenience name for target.
+test_barker_manager_basic: tests/CMakeFiles/test_barker_manager_basic.dir/rule
+
+.PHONY : test_barker_manager_basic
+
+# clean rule for target.
+tests/CMakeFiles/test_barker_manager_basic.dir/clean:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/clean
+.PHONY : tests/CMakeFiles/test_barker_manager_basic.dir/clean
+
+#=============================================================================
 # Target rules for target tests/CMakeFiles/test_barker_user.dir
 
 # All Build rule for target.
@@ -342,7 +373,7 @@ tests/CMakeFiles/test_barker_user.dir/all: googletest-build/googletest/CMakeFile
 tests/CMakeFiles/test_barker_user.dir/all: googletest-build/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_user.dir/build.make tests/CMakeFiles/test_barker_user.dir/depend
 	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_user.dir/build.make tests/CMakeFiles/test_barker_user.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug/CMakeFiles --progress-num=20,21 "Built target test_barker_user"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug/CMakeFiles --progress-num=22,23 "Built target test_barker_user"
 .PHONY : tests/CMakeFiles/test_barker_user.dir/all
 
 # Build rule for subdir invocation for target.

@@ -7,3 +7,7 @@
 *
 **/
 
+#ifndef PUBLICATION_HPP
+#define PUBLICATION_HPP
+
+#endif

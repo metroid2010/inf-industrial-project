@@ -11,6 +11,9 @@
 #include <vector>
 #include "Publication.hpp"
 
+#ifndef PUBLICUSERDATA_HPP
+#define PUBLICUSERDATA_HPP
+
 using namespace std;
 
 class PublicUserData {
@@ -43,3 +46,5 @@ public:
 //    ~PublicUserData();
 
 };
+
+#endif

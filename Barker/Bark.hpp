@@ -7,3 +7,7 @@
 *
 **/
 
+#ifndef BARK_HPP
+#define BARK_HPP
+
+#endif

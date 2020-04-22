@@ -7,6 +7,12 @@
 #IncludeRegexTransform: 
 
 /home/rober/src/inf-industrial-project/Barker/Manager.hpp
+iostream
+-
+vector
+-
+User.hpp
+/home/rober/src/inf-industrial-project/Barker/User.hpp
 
 /home/rober/src/inf-industrial-project/Barker/PrivateUserData.hpp
 iostream

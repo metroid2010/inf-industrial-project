@@ -100,17 +100,6 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -121,6 +110,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target install
 install: preinstall
@@ -177,6 +177,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+tests/CMakeFiles/test_barker_manager_basic.dir/rule:
+	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_barker_manager_basic.dir/rule
+.PHONY : tests/CMakeFiles/test_barker_manager_basic.dir/rule
+
+# Convenience name for target.
+test_barker_manager_basic: tests/CMakeFiles/test_barker_manager_basic.dir/rule
+
+.PHONY : test_barker_manager_basic
+
+# fast build rule for target.
+test_barker_manager_basic/fast:
+	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/build
+.PHONY : test_barker_manager_basic/fast
+
+# Convenience name for target.
 tests/CMakeFiles/test_barker_user.dir/rule:
 	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tests/CMakeFiles/test_barker_user.dir/rule
 .PHONY : tests/CMakeFiles/test_barker_user.dir/rule
@@ -190,6 +205,33 @@ test_barker_user: tests/CMakeFiles/test_barker_user.dir/rule
 test_barker_user/fast:
 	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_user.dir/build.make tests/CMakeFiles/test_barker_user.dir/build
 .PHONY : test_barker_user/fast
+
+test_barker_manager_basic.o: test_barker_manager_basic.cpp.o
+
+.PHONY : test_barker_manager_basic.o
+
+# target to build an object file
+test_barker_manager_basic.cpp.o:
+	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/test_barker_manager_basic.cpp.o
+.PHONY : test_barker_manager_basic.cpp.o
+
+test_barker_manager_basic.i: test_barker_manager_basic.cpp.i
+
+.PHONY : test_barker_manager_basic.i
+
+# target to preprocess a source file
+test_barker_manager_basic.cpp.i:
+	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/test_barker_manager_basic.cpp.i
+.PHONY : test_barker_manager_basic.cpp.i
+
+test_barker_manager_basic.s: test_barker_manager_basic.cpp.s
+
+.PHONY : test_barker_manager_basic.s
+
+# target to generate assembly for a file
+test_barker_manager_basic.cpp.s:
+	cd /home/rober/src/inf-industrial-project/build-Barker-Desktop-Debug && $(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_barker_manager_basic.dir/build.make tests/CMakeFiles/test_barker_manager_basic.dir/test_barker_manager_basic.cpp.s
+.PHONY : test_barker_manager_basic.cpp.s
 
 test_barker_user.o: test_barker_user.cpp.o
 
@@ -230,7 +272,11 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... test_barker_manager_basic"
 	@echo "... test_barker_user"
+	@echo "... test_barker_manager_basic.o"
+	@echo "... test_barker_manager_basic.i"
+	@echo "... test_barker_manager_basic.s"
 	@echo "... test_barker_user.o"
 	@echo "... test_barker_user.i"
 	@echo "... test_barker_user.s"
