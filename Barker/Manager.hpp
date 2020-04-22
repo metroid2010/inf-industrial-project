@@ -21,10 +21,10 @@ class Manager {
 private:
     vector<User*> _users;
     int _currentUser;
+    int searchUser(string data, string type); // auxiliary function, outside specs
 
 public:
     Manager();
-    int searchUser(string data, string type); // auxiliary function
     bool createUser(string email, string password, string username, string bio);
     vector<PublicUserData*> showUsers();
     PublicUserData* showUser(string username);
