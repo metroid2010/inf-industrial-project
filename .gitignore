@@ -1,2 +1,3 @@
-build-Barker-Desktop-Debug/googletest-src
+build-Barker-Desktop-Debug
 build-Barker-Desktop_Qt_5_14_1_GCC_64bit-Debug
+Barker/CMakeLists.txt.user*
