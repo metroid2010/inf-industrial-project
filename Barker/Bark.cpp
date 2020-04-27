@@ -3,9 +3,10 @@
 * Grupo 9
 * Esther Alonso Pinillos, Roberto Uceda Gomez
 *
-* Implementacion de metodos de clase:Bark
+* Implementacion de metodos de clase: Bark
 *
 **/
+
 #include"Bark.hpp"
 
 Bark::Bark(int id, ulong time, PublicUserData* user, string text):Publication(id, time,  user){

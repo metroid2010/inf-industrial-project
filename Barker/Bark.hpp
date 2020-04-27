@@ -3,13 +3,15 @@
 * Grupo 9
 * Esther Alonso Pinillos, Roberto Uceda Gomez
 *
-* Archivo de cabecera:Bsrk
+* Archivo de cabecera: Bark
 *
 **/
+
 #include <iostream>
 
 #ifndef BARK_HPP
 #define BARK_HPP
+
 #include "PublicUserData.hpp"
 #include "Publication.hpp"
 

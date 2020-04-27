@@ -38,12 +38,12 @@ public:
     void increaseFollowers();
     void decreaseFollowers();
     vector<PublicUserData*> getFollowing();
-    //vector<Publication*> getPublications();
+    //vector<Publication*> getPublications(); // para entregas posteriores
     bool follow(PublicUserData* user);
     bool unfollow(PublicUserData* user);
-    //bool addPublication(Publication* user);
+    //bool addPublication(Publication* user); // para entregas posteriores
     bool removePublication(int id);
-//    ~PublicUserData();
+//    ~PublicUserData(); // no necesario por ahora
 
 };
 

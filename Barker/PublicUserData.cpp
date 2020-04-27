@@ -52,6 +52,7 @@ vector<PublicUserData*> PublicUserData::getFollowing() {
     return _following;
 }
 
+// para entregas posteriores
 //vector<Publication*> PublicUserData::getPublications() {
 //    return _publications;
 //}
@@ -79,6 +80,8 @@ bool PublicUserData::unfollow(PublicUserData* user) {
 
     return false;
 }
+
+// para entregas posteriores
 //bool PublicUserData::addPublication(Publication* user) {
 
 //    for (uint i = 0; i < _publication.size(); i++ ) {
@@ -92,4 +95,5 @@ bool PublicUserData::unfollow(PublicUserData* user) {
 //}
 //bool removePublication(int id);
 
+// no necesario por ahora
 //PublicUserData::~PublicUserData() {}

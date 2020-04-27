@@ -1,3 +1,13 @@
+/**
+* Proyecto Informatica Industrial
+* Grupo 9
+* Esther Alonso Pinillos, Roberto Uceda Gomez
+*
+* main.cpp
+* por ahora, placeholder
+*
+**/
+
 #include <iostream>
 
 using namespace std;

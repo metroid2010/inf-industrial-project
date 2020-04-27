@@ -21,7 +21,7 @@ class Manager {
 private:
     vector<User*> _users;
     int _currentUser;
-    int searchUser(string data, string type); // auxiliary function, outside specs
+    int searchUser(string data, string type); // funcion auxiliar, fuera de especificaciones
 
 public:
     Manager();
