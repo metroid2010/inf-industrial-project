@@ -7,10 +7,10 @@
 *
 **/
 
-#include <iostream>
-
 #ifndef PRIVATEUSERDATA_HPP
 #define PRIVATEUSERDATA_HPP
+
+#include <iostream>
 
 using namespace std;
 

@@ -7,14 +7,18 @@
 *
 **/
 
-#include <iostream>
-#include <vector>
-#include "Publication.hpp"
+
 
 #ifndef PUBLICUSERDATA_HPP
 #define PUBLICUSERDATA_HPP
 
+#include <iostream>
+#include <vector>
+#include "Publication.hpp"
+
 using namespace std;
+
+//class Publication; // forward declaration to prevent mutual inclusion
 
 class PublicUserData {
 
@@ -23,7 +27,7 @@ protected:
     string _bio;
     uint _followers;
     vector<PublicUserData*> _following;
-    //vector<Publication*> _publications;
+    vector<Publication*> _publications;
     PublicUserData(string username, string bio);
 
 private:
@@ -38,12 +42,12 @@ public:
     void increaseFollowers();
     void decreaseFollowers();
     vector<PublicUserData*> getFollowing();
-    //vector<Publication*> getPublications(); // para entregas posteriores
+    vector<Publication*> getPublications();
+    bool addPublication(Publication* pub);
+    bool removePublication(int id);
     bool follow(PublicUserData* user);
     bool unfollow(PublicUserData* user);
-    //bool addPublication(Publication* user); // para entregas posteriores
-    bool removePublication(int id);
-//    ~PublicUserData(); // no necesario por ahora
+    ~PublicUserData();
 
 };
 

@@ -6,14 +6,17 @@
 * Archivo de cabecera: Publication
 *
 **/
-#include <iostream>
-#include <vector>
-
-
 
 #ifndef PUBLICATION_HPP
 #define PUBLICATION_HPP
-#include "PublicUserData.hpp"
+
+#include <iostream>
+#include <vector>
+//#include "PublicUserData.hpp"
+
+using namespace std;
+
+class PublicUserData;
 
 class Publication{
 protected:
@@ -30,6 +33,7 @@ public:
     void setTime(ulong time);
     void setUser(PublicUserData* user);
     virtual string getBark()=0;
+    virtual ~Publication();
 
 };
 

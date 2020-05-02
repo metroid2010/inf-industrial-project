@@ -13,9 +13,9 @@ target_link_libraries(test_barker_publication gtest_main BarkerLib)
 add_test(NAME test_barker_publication COMMAND test_barker_publication)
 
 # Comenta este bloque para ignorar este test
-#add_executable(test_barker_publication_integration test_barker_publication_integration.cpp)
-#target_link_libraries(test_barker_publication_integration gtest_main BarkerLib)
-#add_test(NAME test_barker_publication_integration COMMAND test_barker_publication_integration)
+add_executable(test_barker_publication_integration test_barker_publication_integration.cpp)
+target_link_libraries(test_barker_publication_integration gtest_main BarkerLib)
+add_test(NAME test_barker_publication_integration COMMAND test_barker_publication_integration)
 
 # Comenta este bloque para ignorar este test
 #add_executable(test_barker_load_save_to_file test_barker_load_save_to_file.cpp)

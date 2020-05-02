@@ -32,3 +32,5 @@ void Rebark::setPublication(Publication* publication){
 string Rebark::getBark(){
     return _user->getUsername()+" rebarked - "+to_string(_time)+":\n"+_text+"\n***\n"+ _publication->getBark()+"\n***";
 }
+
+Rebark::~Rebark() {}

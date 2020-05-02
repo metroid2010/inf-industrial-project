@@ -9,9 +9,12 @@
 
 #ifndef REPLY_HPP
 #define REPLY_HPP
+
 #include "PublicUserData.hpp"
 #include "Publication.hpp"
+
 class Reply: public Publication{
+
 private:
     string _text;
     Publication *_publication;
@@ -23,6 +26,7 @@ public:
     void setPublication(Publication* publication);
     Publication* getPublication();
     string getBark();
+    ~Reply();
 
 };
 #endif

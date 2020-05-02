@@ -44,5 +44,6 @@ add_library(BarkerLib User.cpp User.hpp PublicUserData.hpp PublicUserData.cpp Pr
 
 add_subdirectory(tests)
 
-add_executable(${PROJECT_NAME} "main.cpp")
+# include every cpp in here so that main.cpp compiles correctly
+add_executable(${PROJECT_NAME} "main.cpp" "User.cpp" "PublicUserData.cpp" "PrivateUserData.cpp" "Manager.cpp" "Publication.cpp" "Bark.cpp" "Rebark.cpp" "Reply.cpp")
 

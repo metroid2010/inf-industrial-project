@@ -36,6 +36,8 @@ void Publication::setUser(PublicUserData* user){
     _user=user;
 }
 
+Publication::~Publication() {}
+
 
 
 

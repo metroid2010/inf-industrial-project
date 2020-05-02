@@ -52,10 +52,10 @@ vector<PublicUserData*> PublicUserData::getFollowing() {
     return _following;
 }
 
-// para entregas posteriores
-//vector<Publication*> PublicUserData::getPublications() {
-//    return _publications;
-//}
+
+vector<Publication*> PublicUserData::getPublications() {
+    return _publications;
+}
 
 bool PublicUserData::follow(PublicUserData* user) {
 
@@ -81,19 +81,46 @@ bool PublicUserData::unfollow(PublicUserData* user) {
     return false;
 }
 
-// para entregas posteriores
-//bool PublicUserData::addPublication(Publication* user) {
 
-//    for (uint i = 0; i < _publication.size(); i++ ) {
-//        if ( _publication[i] == user ) {
-//            return false;
-//        }
-//    }
-//    _following.push_back(user);
+bool PublicUserData::addPublication(Publication* pub) {
 
-//    return true;
-//}
-//bool removePublication(int id);
+    // check the publication is not included already
+    for (uint i = 0; i < _publications.size(); i++ ) {
+        if ( _publications[i] == pub ) {
+            return false;
+        }
+    }
 
-// no necesario por ahora
-//PublicUserData::~PublicUserData() {}
+    // check publication is not owned by another user
+    if ( pub->getUser() != this ) {
+        return false;
+    }
+
+    // add publication if it is not already in list
+    _publications.push_back(pub);
+
+    return true;
+}
+
+bool PublicUserData::removePublication(int id) {
+
+    // find the position in _publication that
+    // corresponds to given ID
+    for ( int i = 0; i < (int) _publications.size(); i++ ) {
+        if ( _publications[i]->getId() == id ) {
+
+            // delete publication object
+            //delete _publications[i];
+
+            // delete pointer to publication
+            _publications.erase( _publications.begin() + i );
+
+            return true;
+        }
+    }
+
+    // publication with ID not found for this user
+    return false;
+}
+
+PublicUserData::~PublicUserData() {}

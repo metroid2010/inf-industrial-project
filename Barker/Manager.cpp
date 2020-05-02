@@ -128,6 +128,13 @@ bool Manager::eraseCurrentUser() {
     // check there is a loggedin user
     if ( _currentUser != -1 ) {
 
+        // delete publications from user
+        for ( int i = 0; i < (int) _users[_currentUser]->getPublications().size(); i++ ) {
+            // erase pointers in _pubs to user publications
+            _pubs.erase( _pubs.begin() + _users[_currentUser]->getPublications()[i]->getId() );
+            delete _users[_currentUser]->getPublications()[i];
+        }
+
         // first delete the user
         delete _users[_currentUser];
 
@@ -250,6 +257,143 @@ bool Manager::unfollowUser(string username) {
     return false; // can't unfollow
 }
 
+vector<Publication *> Manager::getUserFeed(string username) {
+
+    // check user exists, get its id
+    int id = searchUser(username, "username");
+
+    // return empty vector if user does not exist
+    if ( id == -1 ) {
+        return vector<Publication*>();
+    }
+
+    // user exists, send user._publications
+    return _users[id]->getPublications();
+
+}
+
+vector<Publication*> Manager::getTimeline() {
+
+    // declare vector to return
+    vector<Publication*> timeline; // it's empty for now
+
+    // check some user is logged in
+    if ( _currentUser == -1 ) {
+        // no user logged in, return empty vector
+        return timeline;
+    }
+
+    // get following from logged user
+    vector<PublicUserData*> following = _users[_currentUser]->getFollowing();
+
+    // iterate timeline list, get list of publications from each user on it
+    for ( uint i = 0 ; i < following.size() ; i++ ){
+
+        // iterate list of publications for user i in timeline list, append
+        for ( uint j = 0; j < following[i]->getPublications().size(); j++ ) {
+            timeline.push_back( following[i]->getPublications()[j] );
+        }
+    }
+
+    // return vector
+    return timeline;
+
+}
+
+bool Manager::createBark(string text) {
+
+    // check some user is logged in
+    if ( _currentUser == -1 ) {
+        // no user logged in, return empty vector
+        return false;
+    }
+
+    // get last id of publication list, add one to get this bark's id
+    int id;
+    if ( _pubs.size() == 0 ) {
+        id = 0;
+    } else {
+        id = _pubs.back()->getId() + 1;
+    }
+
+    // get time
+    time_t t = time(0);
+
+    // create bark
+    Bark* bark = new Bark(id, t, _users[_currentUser], text);
+
+    _pubs.push_back(bark);
+    _users[_currentUser]->addPublication(bark);
+
+    return true;
+}
+
+bool Manager::createRebark(int id, string text) {
+
+    // check some user is logged in
+    if ( _currentUser == -1 ) {
+        // no user logged in, return empty vector
+        return false;
+    }
+
+    // check publication exists, id is not out of bonds
+    if ( (int) _pubs.size() < id ) {
+        return false;
+    }
+
+    // get last id of publication list, add one to get this bark's id
+    int id_new;
+    if ( _pubs.back() == nullptr ) {
+        id_new = 0;
+    } else {
+        id_new = _pubs.back()->getId() + 1;
+    }
+
+    // get time
+    time_t t = time(0);
+
+    // create rebark
+    Rebark* rebark = new Rebark(id_new, t, _pubs[id], _users[_currentUser], text);
+
+    _pubs.push_back(rebark);
+    _users[_currentUser]->addPublication(rebark);
+
+    return true;
+}
+
+bool Manager::createReply(int id, string text) {
+
+    // check some user is logged in
+    if ( _currentUser == -1 ) {
+        // no user logged in, return empty vector
+        return false;
+    }
+
+    // check publication exists, id is not out of bonds
+    if ( (int) _pubs.size() < id ) {
+        return false;
+    }
+
+    // get last id of publication list, add one to get this bark's id
+    int id_new;
+    if ( _pubs.back() == nullptr ) {
+        id_new = 0;
+    } else {
+        id_new = _pubs.back()->getId() + 1;
+    }
+
+    // get time
+    time_t t = time(0);
+
+    // create rebark
+    Reply* reply = new Reply(id_new, t, _pubs[id], _users[_currentUser], text);
+
+    _pubs.push_back(reply);
+    _users[_currentUser]->addPublication(reply);
+
+    return true;
+}
+
 Manager::~Manager() {
 
     // delete each user in _users
@@ -259,4 +403,12 @@ Manager::~Manager() {
 
     // clear remaining references
     _users.clear();
+
+    // delete each user in _users
+    for (uint i = 0; i < _pubs.size(); i++ ) {
+        delete _pubs[i];
+    }
+
+    // clear remaining references
+    _pubs.clear();
 }

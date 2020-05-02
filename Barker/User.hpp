@@ -7,12 +7,12 @@
 *
 **/
 
+#ifndef USER_HPP
+#define USER_HPP
+
 #include <iostream>
 #include "PublicUserData.hpp"
 #include "PrivateUserData.hpp"
-
-#ifndef USER_HPP
-#define USER_HPP
 
 using namespace std;
 

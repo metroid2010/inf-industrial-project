@@ -7,12 +7,16 @@
 *
 **/
 
+#ifndef MANAGER_HPP
+#define MANAGER_HPP
+
 #include <iostream>
 #include <vector>
 #include "User.hpp"
-
-#ifndef MANAGER_HPP
-#define MANAGER_HPP
+#include "Bark.hpp"
+#include "Rebark.hpp"
+#include "Reply.hpp"
+#include <ctime>
 
 using namespace std;
 
@@ -22,6 +26,7 @@ private:
     vector<User*> _users;
     int _currentUser;
     int searchUser(string data, string type); // funcion auxiliar, fuera de especificaciones
+    vector<Publication*> _pubs;
 
 public:
     Manager();
@@ -39,6 +44,11 @@ public:
     bool editBio(string bio);
     bool followUser(string username);
     bool unfollowUser(string username);
+    vector<Publication*> getUserFeed(string username);
+    vector<Publication*> getTimeline();
+    bool createBark(string text);
+    bool createRebark(int id, string text);
+    bool createReply(int id, string text);
     ~Manager();
 
 };

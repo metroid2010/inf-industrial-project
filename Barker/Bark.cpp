@@ -24,3 +24,5 @@ void Bark::setText(string text){
 string Bark::getBark(){
     return _user->getUsername()+" - "+to_string(_time)+":\n"+_text;
 }
+
+Bark::~Bark() {}

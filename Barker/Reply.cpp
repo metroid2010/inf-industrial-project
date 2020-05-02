@@ -34,3 +34,5 @@ string Reply::getBark(){
     return _user->getUsername()+" replied - "+to_string(_time)+":\n===\n"+ _publication->getBark()+"\n===\n"+_text;
 }
 
+Reply::~Reply() {}
+

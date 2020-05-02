@@ -24,6 +24,7 @@ public:
     void setText(string text);
     string getText();
     string getBark();
+    ~Bark();
 
 };
 
