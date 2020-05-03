@@ -18,7 +18,7 @@ target_link_libraries(test_barker_publication_integration gtest_main BarkerLib)
 add_test(NAME test_barker_publication_integration COMMAND test_barker_publication_integration)
 
 # Comenta este bloque para ignorar este test
-#add_executable(test_barker_load_save_to_file test_barker_load_save_to_file.cpp)
-#target_link_libraries(test_barker_load_save_to_file gtest_main BarkerLib)
-#add_test(NAME test_barker_load_save_to_file COMMAND test_barker_load_save_to_file)
-#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/test_data.dat ${CMAKE_CURRENT_BINARY_DIR}/test_data.dat COPYONLY)
+add_executable(test_barker_load_save_to_file test_barker_load_save_to_file.cpp)
+target_link_libraries(test_barker_load_save_to_file gtest_main BarkerLib)
+add_test(NAME test_barker_load_save_to_file COMMAND test_barker_load_save_to_file)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/test_data.dat ${CMAKE_CURRENT_BINARY_DIR}/test_data.dat COPYONLY)

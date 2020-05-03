@@ -23,6 +23,7 @@ public:
     void setPublication(Publication* publication);
     Publication* getPublication();
     string getBark();
+    int getType();
     ~Rebark();
 
 };

@@ -17,6 +17,7 @@
 #include "Rebark.hpp"
 #include "Reply.hpp"
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 
@@ -49,6 +50,8 @@ public:
     bool createBark(string text);
     bool createRebark(int id, string text);
     bool createReply(int id, string text);
+    bool saveToFile(string path);
+    bool loadFromFile(string path);
     ~Manager();
 
 };

@@ -394,6 +394,64 @@ bool Manager::createReply(int id, string text) {
     return true;
 }
 
+bool Manager::saveToFile(string path) {
+
+    ofstream f(path);
+
+    for ( int i = 0; i < (int) _users.size(); i++ ) {
+        f << "#" << endl;
+        f << _users[i]->getEmail() << endl;
+        f << _users[i]->getPassword() << endl;
+        f << _users[i]->getUsername() << endl;
+        f << _users[i]->getBio() << endl;
+        f << _users[i]->getFollowers() << endl;
+        f << "following:" << endl;
+        for ( int j = 0; j < (int) _users[i]->getFollowing().size(); j++ ) {
+            f << _users[i]->getFollowing()[j]->getUsername() << endl;
+        }
+        f << "publications:" << endl;
+        for ( int j = 0; j < (int) _users[i]->getPublications().size(); j++ ) {
+            f << _users[i]->getPublications()[j]->getId() << endl;
+        }
+        f << "#" << endl;
+    }
+
+    for ( int i = 0; i < (int) _pubs.size(); i++ ) {
+
+        if ( _pubs[i]->getType() == 0 ) { // it's a bark
+            f << "$Bark" << endl;
+        } else if ( _pubs[i]->getType() == 1 ) { // it's a rebark
+            f << "$Rebark" << endl;
+        } else {
+            f << "$Reply" << endl;
+        }
+
+        f << _pubs[i]->getId() << endl;
+        f << _pubs[i]->getTime() << endl;
+
+        if ( _pubs[i]->getType() == 1 ) {
+            Rebark* r = dynamic_cast<Rebark*>(_pubs[i]);
+            f << r->getPublication()->getId() << endl;
+
+        } else if ( _pubs[i]->getType() == 2 ) {
+            Reply* r = dynamic_cast<Reply*>(_pubs[i]);
+            f << r->getPublication()->getId() << endl;
+        }
+
+        f << _pubs[i]->getUser()->getUsername() << endl;
+        f << _pubs[i]->getText() << endl;
+    }
+
+    f.close();
+
+    return true;
+
+}
+
+bool Manager::loadFromFile(string path) {
+    return false;
+}
+
 Manager::~Manager() {
 
     // delete each user in _users

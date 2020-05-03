@@ -10,6 +10,7 @@
 Rebark::Rebark(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
     _publication = publication;
+    _type=1;
 
 }
 
@@ -31,6 +32,10 @@ void Rebark::setPublication(Publication* publication){
 
 string Rebark::getBark(){
     return _user->getUsername()+" rebarked - "+to_string(_time)+":\n"+_text+"\n***\n"+ _publication->getBark()+"\n***";
+}
+
+int Rebark::getType() {
+    return _type;
 }
 
 Rebark::~Rebark() {}

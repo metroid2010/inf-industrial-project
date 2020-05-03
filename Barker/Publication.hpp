@@ -19,10 +19,12 @@ using namespace std;
 class PublicUserData;
 
 class Publication{
+
 protected:
     int _id;
     ulong _time;
     PublicUserData* _user;
+    int _type;
 
 public:
     Publication(int id, ulong time, PublicUserData* user);
@@ -32,6 +34,8 @@ public:
     void setId(int id);
     void setTime(ulong time);
     void setUser(PublicUserData* user);
+    virtual string getText()=0;
+    virtual int getType()=0;
     virtual string getBark()=0;
     virtual ~Publication();
 

@@ -11,6 +11,7 @@
 Reply::Reply(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
     _publication = publication;
+    _type=2;
 
 }
 
@@ -32,6 +33,10 @@ void Reply::setPublication(Publication* publication){
 
 string Reply::getBark(){
     return _user->getUsername()+" replied - "+to_string(_time)+":\n===\n"+ _publication->getBark()+"\n===\n"+_text;
+}
+
+int Reply::getType() {
+    return _type;
 }
 
 Reply::~Reply() {}

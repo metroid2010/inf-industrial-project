@@ -7,10 +7,11 @@
 *
 **/
 
-#include"Bark.hpp"
+#include "Bark.hpp"
 
 Bark::Bark(int id, ulong time, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
+    _type=0;
 }
 
 string Bark::getText(){
@@ -23,6 +24,10 @@ void Bark::setText(string text){
 
 string Bark::getBark(){
     return _user->getUsername()+" - "+to_string(_time)+":\n"+_text;
+}
+
+int Bark::getType() {
+    return _type;
 }
 
 Bark::~Bark() {}
