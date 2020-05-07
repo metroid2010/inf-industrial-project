@@ -449,10 +449,11 @@ bool Manager::saveToFile(string path) {
 }
 
 bool Manager::loadFromFile(string path) {
+
     ifstream f;
     f.open(path);
     vector<string> v;
-    int i=0, k=0, uid;
+    int i=0, k=0, uid; // ya tienes otra i definida mas abajo (en el for)
     string s;
 
     if ( f.fail()){
@@ -461,31 +462,39 @@ bool Manager::loadFromFile(string path) {
         while (!f.eof()) {
             getline(f, s);
             v.push_back(s);
-            f.close();
+            f.close(); // f se cierra tras leer la primera linea
         }
     }
 
     for(int i=0; i<(int)v.size(); i++){
-        if(v[i]!="$Bark"&&v[i]!="$Rebark"&&v[i]!="$Reply"){
-            break;}
+        if( v[i] != "$Bark" && v[i] != "$Rebark" && v[i] != "$Reply" ) {
+            break;
+        }
+
         if(v[i]=="#"){
             i++;
 
             if(v[i]=="#"){
                 i++;
             }
-            createUser(v[i],v[i+1],v[i+2],v[i+3]);
-            login(v[i], v[i+1]);
+
+            createUser(v[i],v[i+1],v[i+2],v[i+3]); // aqui no me la jugaria tanto, comprobaria que estos valores son correctos
+            // si el archivo no esta correctamente formateado, se jode el programa
+            login(v[i], v[i+1]); // no hace falta que se loguee el usuario
             i=+4;
             for(int j=0; j<stoi(v[i]);j++){
-                _users[_currentUser]->increaseFollowers();
+                _users[_currentUser]->increaseFollowers(); // se puede llamar a este metodo sin loguearse
             }
             logout();
         }
     }
+
     for(int i=0; i<(int)v.size(); i++){
-        if(v[i]!="$Bark"&&v[i]!="$Rebark"&&v[i]!="$Reply"){
-            break;}
+
+        if( v[i] != "$Bark" && v[i] != "$Rebark" && v[i] != "$Reply" ){
+            break;
+        }
+
         if(v[i]=="#"){
             i++;
             if(v[i]=="#"){
@@ -494,6 +503,7 @@ bool Manager::loadFromFile(string path) {
                 i=+6;
             }
         }
+
         while(v[i]!="publications"){
             uid=searchUser(v[i],"username");
             _users[_currentUser]->follow((PublicUserData*)_users[uid]);

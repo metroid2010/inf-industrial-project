@@ -449,7 +449,27 @@ bool Manager::saveToFile(string path) {
 }
 
 bool Manager::loadFromFile(string path) {
-    return false;
+
+    ifstream f(path);
+
+    // check we can read the file correctly
+    if ( f.good() == false ) {
+        return false;
+    }
+
+    string line;
+    // read each line in file until EOF
+    while ( f.eof() != 1 ) {
+
+        getline(f, line);
+        // read users
+        if ( line == "#" ) {
+
+        }
+
+    }
+
+    return true;
 }
 
 Manager::~Manager() {
