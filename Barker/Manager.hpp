@@ -18,6 +18,7 @@
 #include "Reply.hpp"
 #include <ctime>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -53,6 +54,7 @@ public:
     bool saveToFile(string path);
     bool loadFromFile(string path);
     ~Manager();
+    static bool compByTime(Publication* a, Publication* b);
 
 };
 

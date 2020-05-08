@@ -9,15 +9,6 @@
 
 #include "Manager.hpp"
 
-//struct fileMap { // helper struct
-//    vector<ios::streampos> position;
-//    vector<char> type; // u, b, r, y
-//    void addToMap (ios::streampos newPos, char newT) {
-//        position.push_back(newPos);
-//        type.push_back(newT);
-//    };
-//};
-
 Manager::Manager() {
     _currentUser = -1;
 }
@@ -44,6 +35,12 @@ int Manager::searchUser(string data, string type) {
     // user not found or other error
     return -1;
 }
+
+//auxiliary function to sort Timeline, gets time from Timeline Publications
+bool Manager::compByTime(Publication* a,Publication* b)
+    {
+        return a->getTime() < b->getTime();
+    }
 
 bool Manager::createUser(string email, string password, string username, string bio) {
 
@@ -303,6 +300,8 @@ vector<Publication*> Manager::getTimeline() {
             timeline.push_back( following[i]->getPublications()[j] );
         }
     }
+    //sort vector timeline in chronological order
+    sort (timeline.begin(),timeline.end(), Manager::compByTime);
 
     // return vector
     return timeline;
@@ -397,8 +396,7 @@ bool Manager::createReply(int id, string text) {
     // create rebark
     Reply* reply = new Reply(id_new, t, _pubs[id], _users[_currentUser], text);
 
-    _pubs.
-push_back(reply);
+    _pubs.push_back(reply);
     _users[_currentUser]->addPublication(reply);
 
     return true;
@@ -457,6 +455,7 @@ bool Manager::saveToFile(string path) {
     return true;
 
 }
+
 
 bool Manager::loadFromFile(string path) {
 
