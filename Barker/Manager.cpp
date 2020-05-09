@@ -36,6 +36,12 @@ int Manager::searchUser(string data, string type) {
     return -1;
 }
 
+//auxiliary function to sort Timeline, gets time from Timeline Publications
+bool Manager::compByTime(Publication* a,Publication* b)
+    {
+        return a->getTime() < b->getTime();
+    }
+
 bool Manager::createUser(string email, string password, string username, string bio) {
 
     // check username does not exist to avoid duplicate users
@@ -294,6 +300,8 @@ vector<Publication*> Manager::getTimeline() {
             timeline.push_back( following[i]->getPublications()[j] );
         }
     }
+    //sort vector timeline in chronological order
+    sort (timeline.begin(),timeline.end(), Manager::compByTime);
 
     // return vector
     return timeline;
@@ -317,7 +325,7 @@ bool Manager::createBark(string text) {
     }
 
     // get time
-    time_t t = time(0);
+    ulong t = time(0);
 
     // create bark
     Bark* bark = new Bark(id, t, _users[_currentUser], text);
@@ -350,7 +358,7 @@ bool Manager::createRebark(int id, string text) {
     }
 
     // get time
-    time_t t = time(0);
+    ulong t = time(0);
 
     // create rebark
     Rebark* rebark = new Rebark(id_new, t, _pubs[id], _users[_currentUser], text);
@@ -383,7 +391,7 @@ bool Manager::createReply(int id, string text) {
     }
 
     // get time
-    time_t t = time(0);
+    ulong t = time(0);
 
     // create rebark
     Reply* reply = new Reply(id_new, t, _pubs[id], _users[_currentUser], text);
@@ -448,8 +456,215 @@ bool Manager::saveToFile(string path) {
 
 }
 
+
 bool Manager::loadFromFile(string path) {
-    return false;
+
+    ifstream f; // input stream file
+    f.open(path); // open as plain text
+
+    // auxiliary line
+    string line;
+
+    // user properties
+    string email;
+    string password;
+    string username;
+    string bio;
+    int followers;
+    vector<string> following; // store following by username
+    vector<int> publications; // store publications by id
+
+    // publication properties
+    int id;
+    time_t time;
+    PublicUserData* pub_username;
+    string text;
+    Publication* orig_pub;
+
+    if ( f.fail() ) {
+        return false; // if there were errors opening the file, quit
+    }
+
+    // create users, publications
+    while ( getline(f, line) ) {
+
+        if( line == "#" ) { // user starts or ends
+
+             getline(f, email);
+             getline(f, password);
+             getline(f, username);
+             getline(f, bio);
+             getline(f, line); // can't get a int from a str
+             followers = stoi(line); // cast to store as int
+             getline(f, line);
+             if ( line != "following:" ) { // there should be a 'following:' in here always
+                 return false;
+             }
+             while ( getline(f, line) && line != "publications:" ) {
+                 following.push_back(line); // store following
+             } // this ends when line == publications
+             while ( getline(f, line) && line != "#" ) {
+                 publications.push_back(stoi(line));
+             } // this ends when line == #, so on to the next object
+
+             // create user
+
+             createUser(email, password, username, bio); // now the user is stored in manager
+
+             // clean remains
+             email = "";
+             password = "";
+             username = "";
+             bio = "";
+             followers = 0;
+             following.clear();
+             publications.clear();
+
+             // on to the next thing, no need to evaluate following code
+             continue;
+
+        } else if ( line == "$Bark" ) {
+
+            getline(f, line);
+            id = stoi(line); // need to cast line to int
+            getline(f, line);
+            time = stol(line);
+            getline(f, line);
+            pub_username = _users[ searchUser(line, "username") ];
+            getline(f, text);
+
+            // create bark
+            Bark* bark = new Bark(id, time, pub_username, text);
+            _pubs.push_back(bark); // trust that barks where saved in order on file!
+
+            // clean remains
+            id = 0;
+            time = 0;
+            pub_username = nullptr;
+            text = "";
+
+            // on to the next thing, no need to evaluate following code
+            continue;
+
+        } else if ( line == "$Rebark" ) {
+
+            getline(f, line);
+            id = stoi(line); // need to cast line to int
+            getline(f, line);
+            time = stol(line);
+            getline(f, line);
+            orig_pub = _pubs[stoi(line)];
+            getline(f, line);
+            pub_username = _users[ searchUser(line, "username") ];
+            getline(f, text);
+
+            // create bark
+            Rebark* rebark = new Rebark(id, time, orig_pub, pub_username, text);
+            _pubs.push_back(rebark); // trust that barks where saved in order on file!
+
+            // clean remains
+            id = 0;
+            time = 0;
+            pub_username = nullptr;
+            text = "";
+            orig_pub = nullptr;
+
+            // on to the next thing, no need to evaluate following code
+            continue;
+
+        } else if ( line == "$Reply" ) {
+
+            getline(f, line);
+            id = stoi(line); // need to cast line to int
+            getline(f, line);
+            time = stol(line);
+            getline(f, line);
+            orig_pub = _pubs[stoi(line)];
+            getline(f, line);
+            pub_username = _users[ searchUser(line, "username") ];
+            getline(f, text);
+
+            // create bark
+            Reply* reply = new Reply(id, time, orig_pub, pub_username, text);
+            _pubs.push_back(reply); // trust that barks where saved in order on file!
+
+            // clean remains
+            id = 0;
+            time = 0;
+            pub_username = nullptr;
+            text = "";
+            orig_pub = nullptr;
+
+            // on to the next thing, no need to evaluate following code
+            continue;
+
+        }
+
+    }
+
+    // all objects created, now need to make follows between users
+
+    f.clear(); // reset flags (EOF)
+    f.seekg(0); // reset position in file to beginning
+    int uid;
+
+    // iterate again whole file to find followers and publications per user, and make the links
+    while ( getline(f, line) ) {
+
+        if( line == "#" ) { // user starts or ends
+
+             getline(f, email);
+             getline(f, password);
+             getline(f, username);
+             getline(f, bio);
+             getline(f, line); // can't get a int from a str
+             followers = stoi(line); // cast to store as int
+             getline(f, line);
+
+             if ( line != "following:" ) { // there should be a 'following:' in here always
+                 return false;
+             }
+
+             while ( getline(f, line) && line != "publications:" ) {
+                 following.push_back(line); // store following
+             } // this ends when line == publications
+
+             while ( getline(f, line) && line != "#" ) {
+                 publications.push_back(stoi(line));
+             } // this ends when line == #, so on to the next object
+
+             // setup followers
+             uid = searchUser(username, "username");
+             for ( int i = 0; i < (int) following.size(); i++ ) {
+                _users[uid]->follow( _users[ searchUser(following[i], "username") ]);
+                _users[ searchUser(following[i], "username") ]->increaseFollowers();
+             }
+
+             // setup publications
+             for ( int i = 0; i < (int) publications.size(); i++ ) {
+                 _users[uid]->addPublication( _pubs[ publications[i] ] );
+             }
+
+             // clean remains
+             email = "";
+             password = "";
+             username = "";
+             bio = "";
+             followers = 0;
+             following.clear();
+             publications.clear();
+
+             // on to the next thing, no need to evaluate following code
+             continue;
+
+        } else if ( line == "$Bark" || line == "$Rebark" || line == "$Reply" ) {
+            break; // we finished all users, so no need to keep reading file
+        }
+
+    }
+
+    // all done!
+    return true;
 }
 
 Manager::~Manager() {
