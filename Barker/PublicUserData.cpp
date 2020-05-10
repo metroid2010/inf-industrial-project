@@ -109,6 +109,9 @@ bool PublicUserData::removePublication(int id) {
     for ( int i = 0; i < (int) _publications.size(); i++ ) {
         if ( _publications[i]->getId() == id ) {
 
+            // delete object publication
+            //delete _publications[id] // won't pass test
+
             // delete pointer to publication
             _publications.erase( _publications.begin() + i );
 

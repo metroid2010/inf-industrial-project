@@ -1,0 +1,9 @@
+Mejoras implementadas:
+- Publication._time se toma del reloj (mirar createBark, createRebark, createReply, usamos time(0) de ctime)
+- Mostrar el timeline del usuario ordenado cronológicamente: se ordena con publication._time creciente en getTimeline, con función auxiliar compByTime
+- Cuando un bark se elimina, rebark y replies to ese bark se eliminan: Bark._rep guarda las referencias a ese Bark, ver Bark::setRep, Bark::getRep, Manager::deletePublication
+
+Mejoras por implementar
+
+- Pedir confirmación antes de borrar una cuenta de usuario
+- Añadir sobrecarga de operador

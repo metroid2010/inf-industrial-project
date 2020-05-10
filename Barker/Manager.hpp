@@ -29,6 +29,7 @@ private:
     int _currentUser;
     int searchUser(string data, string type); // funcion auxiliar, fuera de especificaciones
     vector<Publication*> _pubs;
+    static bool compByTime(Publication* a, Publication* b);
 
 public:
     Manager();
@@ -55,7 +56,6 @@ public:
     bool saveToFile(string path);
     bool loadFromFile(string path);
     ~Manager();
-    static bool compByTime(Publication* a, Publication* b);
 
 };
 

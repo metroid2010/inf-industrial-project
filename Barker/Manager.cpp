@@ -37,10 +37,9 @@ int Manager::searchUser(string data, string type) {
 }
 
 //auxiliary function to sort Timeline, gets time from Timeline Publications
-bool Manager::compByTime(Publication* a,Publication* b)
-    {
-        return a->getTime() < b->getTime();
-    }
+bool Manager::compByTime(Publication* a,Publication* b) {
+    return a->getTime() < b->getTime();
+}
 
 bool Manager::createUser(string email, string password, string username, string bio) {
 
@@ -137,7 +136,8 @@ bool Manager::eraseCurrentUser() {
         // delete publications from user
         for ( int i = 0; i < (int) _users[_currentUser]->getPublications().size(); i++ ) {
             // erase pointers in _pubs to user publications
-            _pubs.erase( _pubs.begin() + _users[_currentUser]->getPublications()[i]->getId() );
+            //_pubs.erase( _pubs.begin() + _users[_currentUser]->getPublications()[i]->getId() );
+            deletePublication( _users[_currentUser]->getPublications()[i]->getId() );
             delete _users[_currentUser]->getPublications()[i];
         }
 
@@ -301,7 +301,7 @@ vector<Publication*> Manager::getTimeline() {
         }
     }
     //sort vector timeline in chronological order
-    sort (timeline.begin(),timeline.end(), Manager::compByTime);
+    sort (timeline.begin(),timeline.end(), compByTime);
 
     // return vector
     return timeline;
@@ -405,7 +405,7 @@ bool Manager::createReply(int id, string text) {
 bool Manager::deletePublication(int id) {
 
     // check publication with id exists
-    if ( (int) _pubs.size() < id ) {
+    if ( _pubs[id] == nullptr ) {
         return false;
     }
 
