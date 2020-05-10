@@ -15,6 +15,7 @@ class Rebark: public Publication{
 private:
     string _text;
     Publication *_publication;
+    int _type = 1;
 
 public:
     Rebark(int id, ulong time, Publication* publication, PublicUserData* user, string text);

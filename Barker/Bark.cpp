@@ -22,12 +22,20 @@ void Bark::setText(string text){
     _text=text;
 }
 
+void Bark::setRep(Publication *rep) {
+    _rep.push_back(rep);
+}
+
 string Bark::getBark(){
     return _user->getUsername()+" - "+to_string(_time)+":\n"+_text;
 }
 
 int Bark::getType() {
     return _type;
+}
+
+vector<Publication*> Bark::getRep(){
+    return _rep;
 }
 
 Bark::~Bark() {}

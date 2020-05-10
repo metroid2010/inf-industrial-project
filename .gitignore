@@ -4,3 +4,4 @@ Barker/CMakeLists.txt.user*
 *.zip
 Barker/*.o
 Barker/*.bin
+Barker/*.autosave

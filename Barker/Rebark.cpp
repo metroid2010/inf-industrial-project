@@ -7,6 +7,8 @@
 *
 **/
 #include "Rebark.hpp"
+#include "Bark.hpp"
+
 Rebark::Rebark(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
     _publication = publication;
@@ -28,6 +30,7 @@ Publication* Rebark::getPublication(){
 
 void Rebark::setPublication(Publication* publication){
     _publication=publication;
+    dynamic_cast<Bark*>(_publication)->setRep(this); // downcast Publication* to Bark*
 }
 
 string Rebark::getBark(){

@@ -51,6 +51,7 @@ public:
     bool createBark(string text);
     bool createRebark(int id, string text);
     bool createReply(int id, string text);
+    bool deletePublication(int id);
     bool saveToFile(string path);
     bool loadFromFile(string path);
     ~Manager();

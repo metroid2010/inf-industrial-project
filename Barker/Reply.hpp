@@ -18,6 +18,7 @@ class Reply: public Publication{
 private:
     string _text;
     Publication *_publication;
+    int _type = 2;
 
 public:
     Reply(int id, ulong time, Publication* publication, PublicUserData* user, string text);

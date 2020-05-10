@@ -312,7 +312,7 @@ bool Manager::createBark(string text) {
 
     // check some user is logged in
     if ( _currentUser == -1 ) {
-        // no user logged in, return empty vector
+        // no user logged in, return false
         return false;
     }
 
@@ -340,7 +340,7 @@ bool Manager::createRebark(int id, string text) {
 
     // check some user is logged in
     if ( _currentUser == -1 ) {
-        // no user logged in, return empty vector
+        // no user logged in, return false
         return false;
     }
 
@@ -373,7 +373,7 @@ bool Manager::createReply(int id, string text) {
 
     // check some user is logged in
     if ( _currentUser == -1 ) {
-        // no user logged in, return empty vector
+        // no user logged in, return false
         return false;
     }
 
@@ -398,6 +398,30 @@ bool Manager::createReply(int id, string text) {
 
     _pubs.push_back(reply);
     _users[_currentUser]->addPublication(reply);
+
+    return true;
+}
+
+bool Manager::deletePublication(int id) {
+
+    // check publication with id exists
+    if ( (int) _pubs.size() < id ) {
+        return false;
+    }
+
+    // if publication is a bark, check if it has references and delete them
+    if ( _pubs[id]->getType() == 0 ) {
+        Bark* b = dynamic_cast<Bark*>( _pubs[id] );
+        for ( int i = 0; i < (int) b->getRep().size(); i++ ) {
+            deletePublication( b->getRep()[i]->getId() ); // recursive fun here
+        }
+    }
+
+    // remove pointer in _pubs
+    _pubs.erase( _pubs.begin() + id );
+
+    // remove pointer in owner user
+    _pubs[id]->getUser()->removePublication(id);
 
     return true;
 }
@@ -438,11 +462,11 @@ bool Manager::saveToFile(string path) {
         f << _pubs[i]->getTime() << endl;
 
         if ( _pubs[i]->getType() == 1 ) {
-            Rebark* r = dynamic_cast<Rebark*>(_pubs[i]);
+            Rebark* r = dynamic_cast<Rebark*>(_pubs[i]); // downcast the Publication* to Rebark
             f << r->getPublication()->getId() << endl;
 
         } else if ( _pubs[i]->getType() == 2 ) {
-            Reply* r = dynamic_cast<Reply*>(_pubs[i]);
+            Reply* r = dynamic_cast<Reply*>(_pubs[i]); // downcast the Publication* to Reply
             f << r->getPublication()->getId() << endl;
         }
 
@@ -455,7 +479,6 @@ bool Manager::saveToFile(string path) {
     return true;
 
 }
-
 
 bool Manager::loadFromFile(string path) {
 
@@ -677,7 +700,7 @@ Manager::~Manager() {
     // clear remaining references
     _users.clear();
 
-    // delete each user in _users
+    // delete each publication in _pubs
     for (uint i = 0; i < _pubs.size(); i++ ) {
         delete _pubs[i];
     }
