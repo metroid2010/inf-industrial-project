@@ -30,6 +30,7 @@ private:
     int searchUser(string data, string type); // funcion auxiliar, fuera de especificaciones
     vector<Publication*> _pubs;
     static bool compByTime(Publication* a, Publication* b);
+    int searchPub(int id);
 
 public:
     Manager();
