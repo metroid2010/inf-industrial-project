@@ -40,10 +40,11 @@ endif()
 
 add_library(BarkerLib User.cpp User.hpp PublicUserData.hpp PublicUserData.cpp PrivateUserData.hpp PrivateUserData.cpp
                                         Manager.hpp Manager.cpp
-                                        Publication.hpp Publication.cpp Bark.hpp Bark.cpp Rebark.hpp Rebark.cpp Reply.hpp Reply.cpp)
+                                        Publication.hpp Publication.cpp Bark.hpp Bark.cpp Rebark.hpp Rebark.cpp Reply.hpp Reply.cpp Interface.hpp Interface.cpp)
 
 add_subdirectory(tests)
 
 # include every cpp in here so that main.cpp compiles correctly
-add_executable(${PROJECT_NAME} "main.cpp" "User.cpp" "PublicUserData.cpp" "PrivateUserData.cpp" "Manager.cpp" "Publication.cpp" "Bark.cpp" "Rebark.cpp" "Reply.cpp")
+add_executable(${PROJECT_NAME} "main.cpp" )
+target_link_libraries(${PROJECT_NAME} BarkerLib)
 
