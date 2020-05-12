@@ -41,6 +41,18 @@ bool Manager::compByTime(Publication* a,Publication* b) {
     return a->getTime() < b->getTime();
 }
 
+int Manager::searchPub(int id) {
+    int pos = -1; // position in _pubs for pub with id, -1 if not found
+    for ( int i = 0; i < (int) _pubs.size(); i++ ) {
+        if ( _pubs[i]->getId() == id ){
+            pos = i;
+            break; // no need to keep searching
+        }
+    }
+
+    return pos;
+}
+
 bool Manager::createUser(string email, string password, string username, string bio) {
 
     // check username does not exist to avoid duplicate users
@@ -56,13 +68,13 @@ bool Manager::createUser(string email, string password, string username, string 
 
 vector<PublicUserData*> Manager::showUsers() {
 
-    vector<PublicUserData*> pus; // pus == PublicUserData vector
+    vector<PublicUserData*> pud; // pud == PublicUserData vector
     // cast every element of _users to PublicUserData*, append to vector
     for (uint i = 0; i < _users.size(); i++ ) {
-        pus.push_back( (PublicUserData*) _users[i] );
+        pud.push_back( (PublicUserData*) _users[i] );
     }
 
-    return pus;
+    return pud;
 }
 
 PublicUserData* Manager::showUser(string username) {
@@ -136,7 +148,6 @@ bool Manager::eraseCurrentUser() {
         // delete publications from user
         for ( int i = 0; i < (int) _users[_currentUser]->getPublications().size(); i++ ) {
             // erase pointers in _pubs to user publications
-            //_pubs.erase( _pubs.begin() + _users[_currentUser]->getPublications()[i]->getId() );
             deletePublication( _users[_currentUser]->getPublications()[i]->getId() );
             delete _users[_currentUser]->getPublications()[i];
         }
@@ -345,7 +356,9 @@ bool Manager::createRebark(int id, string text) {
     }
 
     // check publication exists, id is not out of bonds
-    if ( (int) _pubs.size() < id ) {
+    int pos;
+    pos = searchPub(id);
+    if ( pos == -1 ) {
         return false;
     }
 
@@ -378,7 +391,9 @@ bool Manager::createReply(int id, string text) {
     }
 
     // check publication exists, id is not out of bonds
-    if ( (int) _pubs.size() < id ) {
+    int pos;
+    pos = searchPub(id);
+    if ( pos == -1 ) {
         return false;
     }
 
@@ -404,8 +419,11 @@ bool Manager::createReply(int id, string text) {
 
 bool Manager::deletePublication(int id) {
 
-    // check publication with id exists
-    if ( _pubs[id] == nullptr ) {
+    // find position in _pubs for publication with id,
+    int pos;
+    pos = searchPub(id);
+
+    if ( pos == -1 ){
         return false;
     }
 
@@ -677,7 +695,7 @@ bool Manager::loadFromFile(string path) {
              following.clear();
              publications.clear();
 
-             // on to the next thing, no need to evaluate following code
+             // on to the next user, no need to evaluate following code
              continue;
 
         } else if ( line == "$Bark" || line == "$Rebark" || line == "$Reply" ) {

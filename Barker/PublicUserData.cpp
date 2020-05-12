@@ -59,11 +59,12 @@ vector<Publication*> PublicUserData::getPublications() {
 
 bool PublicUserData::follow(PublicUserData* user) {
 
-    for (uint i = 0; i < _following.size(); i++ ) {
+    for ( uint i = 0; i < _following.size(); i++ ) {
         if ( _following[i] == user ) {
             return false;
         }
     }
+
     _following.push_back(user);
 
     return true;
