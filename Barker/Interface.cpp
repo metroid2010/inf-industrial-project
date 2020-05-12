@@ -17,7 +17,7 @@ int Interface::optionMenu(vector<string> options, string prompt) {
 
     // show options
     for ( int i = 0; i < (int) options.size(); i++ ) {
-        cout << "1- " << options[i] << endl;
+        cout << i << "- " << options[i] << endl;
     }
 
     // get option
@@ -64,40 +64,147 @@ Interface::Interface(Manager* m) {
     _m = m;
 }
 
-void startInterface() {
+void Interface::startInterface() {
     // this is the main function for the interface, which starts an interface and sets the flow that links the next functions
+    int option;
+    bool logged = false;
+    do {
+        option = menuLoginScreen();
+        switch (option) {
+            case 0:
+                if ( menuLogin() ) {
+                    logged = true;
+                }
+                break;
+            case 1:
+                menuCreateUser();
+                break;
+            case 2:
+                return;
+        }
+    } while ( !logged );
+
+    // main loop
+    int mainSelect;
+    int loggedout = 0;
+    do {
+
+        mainSelect = menuMain();
+        switch ( mainSelect ) {
+            case 0:
+
+            case 1:
+
+            case 2:
+            case 3:
+            case 4:
+
+            case 5:
+                loggedout = menuLogout();
+        }
+
+    } while ( loggedout == 0 ); // exit on user chose to logout
+
+
 
 }
 
-void Interface::menuLogin() {
+int Interface::menuLoginScreen() {
+    // show login menu
 
+    // options
+    vector<string> options = { "Login", "Sign in", "Exit" };
+    cout << "Welcome to Barker!" << endl;
+    int input;
+    input = optionMenu(options);
+
+    return input;
+}
+
+bool Interface::menuLogin() {
+
+    string email;
+    string password;
+
+    // show login prompt
+    cout << "Email: ";
+    cin >> email;
+    cout << "Password: ";
+    getline(cin, password);
+
+    return ( _m->login(email, password) );
 }
 
 void Interface::menuCreateUser() {
 
+    string email;
+    string username;
+    string bio;
+    string password;
+
+    cout << "Email: ";
+    cin >> email;
+    cout << "Password: ";
+    getline(cin, password);
+    cout << "Username: ";
+    cin >> username;
+    cout << "Bio: ";
+    getline(cin, bio);
+
+    if ( _m->createUser(email, password, username, bio) ) {
+        cout << "User account created" << endl;
+    } else {
+        cout << "Error, account not created" << endl;
+    }
 }
 
 void Interface::menuDeleteUser() {
 
 }
 
-void Interface::menuLogout() {
+int Interface::menuLogout() {
+
+    int input;
+    string prompt = "Are you sure you want to logout?";
+    vector<string> options = { "Yes", "No" };
+    input = optionMenu(options, prompt);
+
+    return input;
+}
+
+int Interface::menuMain() {
+
+    cout << "Welcome to Bark!" << endl;
+
+    // options
+    vector<string> options = { "Publish Bark", "Show followed users' timeline", "Show Feed", "Search user", "Settings", "Logout" };
+    int input;
+    input = optionMenu(options);
+
+    return input;
 
 }
 
-void Interface::menuMain() {
+bool Interface::menuPublishBark() {
+    string text;
+    cout << "Text to bark: ";
+    getline(cin, text);
+    string prompt = "Confirm publish? ";
+    vector<string> options = { "Yes", "Cancel" };
+    int input = optionMenu(options, prompt);
+    if ( input == 0 ) {
+        _m->createBark(text);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Interface::menuPublishRebark() {
 
 }
 
-void Interface::menuPublishBark() {
-
-}
-
-void Interface::menuPublishRebark() {
-
-}
-
-void Interface::menuPublishReply() {
+bool Interface::menuPublishReply() {
 
 }
 

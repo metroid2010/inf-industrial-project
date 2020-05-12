@@ -23,17 +23,18 @@ private:
     int optionMenu(vector<string> options, string prompt);
     int optionMenu(vector<string> options);
 
-public:    
+public:
     Interface(Manager* m);
     void startInterface();
-    void menuLogin();
+    int menuLoginScreen();
+    bool menuLogin();
     void menuCreateUser();
     void menuDeleteUser();
-    void menuLogout();
-    void menuMain();
-    void menuPublishBark();
-    void menuPublishRebark();
-    void menuPublishReply();
+    int menuLogout();
+    int menuMain();
+    bool menuPublishBark();
+    bool menuPublishRebark();
+    bool menuPublishReply();
     void menuTimeline();
     void menuSelectPub();
     void menuFeed();
