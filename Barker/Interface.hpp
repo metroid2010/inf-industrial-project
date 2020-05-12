@@ -20,6 +20,8 @@ friend class Manager;
 private:
     Interface();
     Manager* _m;
+    int optionMenu(vector<string> options, string prompt);
+    int optionMenu(vector<string> options);
 
 public:    
     Interface(Manager* m);

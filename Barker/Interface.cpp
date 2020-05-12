@@ -8,9 +8,57 @@
 **/
 
 #include "Interface.hpp"
-#include "curses.h"
 
 Interface::Interface() {}
+
+int Interface::optionMenu(vector<string> options, string prompt) {
+    // show prompt
+    cout << prompt << endl;
+
+    // show options
+    for ( int i = 0; i < (int) options.size(); i++ ) {
+        cout << "1- " << options[i] << endl;
+    }
+
+    // get option
+    uint input;
+    do {
+        cout << "$> ";
+        cin >> input;
+        if ( cin.fail() || input < 0 || input > options.size() ) {
+            cout << "Option not valid, try again" << endl;
+        } else {
+            break; // we got a valid option
+        }
+    } while ( true );
+
+    return input;
+}
+
+int Interface::optionMenu(vector<string> options) {
+    // show prompt
+    string prompt = "Choose an option"; // default prompt
+    cout << prompt << endl;
+
+    // show options
+    for ( int i = 0; i < (int) options.size(); i++ ) {
+        cout << "1- " << options[i] << endl;
+    }
+
+    // get option
+    uint input;
+    do {
+        cout << "$> ";
+        cin >> input;
+        if ( cin.fail() || input < 0 || input > options.size() ) {
+            cout << "Option not valid, try again" << endl;
+        } else {
+            break; // we got a valid option
+        }
+    } while ( true );
+
+    return input;
+}
 
 Interface::Interface(Manager* m) {
     _m = m;
