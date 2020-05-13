@@ -9,37 +9,31 @@
 **/
 
 #include <iostream>
-//#include "Manager.hpp"
-//#include "User.hpp"
-//#include "Publication.hpp"
-//#include "Bark.hpp"
-//#include "Rebark.hpp"
-//#include "Reply.hpp"
+#include "Manager.hpp"
+#include "User.hpp"
+#include "Publication.hpp"
+#include "Bark.hpp"
+#include "Rebark.hpp"
+#include "Reply.hpp"
+#include "Interface.hpp"
 
 using namespace std;
 
 int main() {
-//    int id = 0;
-//    ulong t1 = 0;
-//    string email = "email";
-//    string username = "username";
-//    string bio = "bio";
-//    string password = "password";
-//    string text1 = "text1";
 
-//    cout << "3";
-//    User* user = new User(email, password, username, bio);
 
-//    cout << "4";
-//    Bark* bark = new Bark(id, t1, user, text1);
+    Manager* m = new Manager();
+    Interface* i = new Interface(m);
 
-//    cout << "1";
-//    user->addPublication(bark);
+    cout << "Starting Barker..." << endl;
 
-//    cout << "2";
-//    user->removePublication(id);
+    i->startInterface();
 
-    cout << "Beside the tests, you can use this file to test your code too" << endl;
+    cout << "Deleting objects and exiting" << endl;
+
+    delete i;
+    delete m;
+
     return 0;
 
 }

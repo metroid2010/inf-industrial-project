@@ -88,24 +88,6 @@ void Interface::startInterface() {
     int mainSelect;
     int loggedout = 0;
     do {
-<<<<<<< Updated upstream
-
-        mainSelect = menuMain();
-        switch ( mainSelect ) {
-            case 0:
-
-            case 1:
-
-            case 2:
-            case 3:
-            case 4:
-
-            case 5:
-                loggedout = menuLogout();
-        }
-
-    } while ( loggedout == 0 ); // exit on user chose to logout
-=======
         mainSelect = menuMain();
         switch ( mainSelect ) {
             case 0:
@@ -130,9 +112,8 @@ void Interface::startInterface() {
         }
 
     } while ( loggedout == 0 && _m->isLogged() ); // exit on user chose to logout
->>>>>>> Stashed changes
 
-
+    return;
 
 }
 
@@ -141,11 +122,7 @@ int Interface::menuLoginScreen() {
 
     // options
     vector<string> options = { "Login", "Sign in", "Exit" };
-<<<<<<< Updated upstream
     cout << "Welcome to Barker!" << endl;
-=======
-    cout << "Welcome to Bark!" << endl;
->>>>>>> Stashed changes
     int input;
     input = optionMenu(options);
 
@@ -190,8 +167,6 @@ void Interface::menuCreateUser() {
 }
 
 void Interface::menuDeleteUser() {
-<<<<<<< Updated upstream
-=======
     string password;
     int input;
 
@@ -218,18 +193,14 @@ void Interface::menuDeleteUser() {
     }
     return;
 
->>>>>>> Stashed changes
 
 }
 
 int Interface::menuLogout() {
 
     int input;
-<<<<<<< Updated upstream
-=======
 
     // options
->>>>>>> Stashed changes
     string prompt = "Are you sure you want to logout?";
     vector<string> options = { "Yes", "No" };
     input = optionMenu(options, prompt);
@@ -239,17 +210,10 @@ int Interface::menuLogout() {
 
 int Interface::menuMain() {
 
-<<<<<<< Updated upstream
-    cout << "Welcome to Bark!" << endl;
-
-    // options
-    vector<string> options = { "Publish Bark", "Show followed users' timeline", "Show Feed", "Search user", "Settings", "Logout" };
-=======
     cout << "Welcome to Bark " << _m->getCurrentUser()->getUsername() << endl;
 
     // options
     vector<string> options = { "Publish Bark", "Show followed users' timeline", "Show Feed", "Search user", "View current followers", "Settings", "Logout" };
->>>>>>> Stashed changes
     int input;
     input = optionMenu(options);
 
@@ -257,37 +221,17 @@ int Interface::menuMain() {
 
 }
 
-<<<<<<< Updated upstream
-bool Interface::menuPublishBark() {
-    string text;
-    cout << "Text to bark: ";
-    getline(cin, text);
-=======
+
 void Interface::menuPublishBark() {
     string text;
     cout << "Text to bark: ";
     getline(cin, text);
 
     // options
->>>>>>> Stashed changes
     string prompt = "Confirm publish? ";
     vector<string> options = { "Yes", "Cancel" };
     int input = optionMenu(options, prompt);
     if ( input == 0 ) {
-<<<<<<< Updated upstream
-        _m->createBark(text);
-        return true;
-    } else {
-        return false;
-    }
-}
-
-bool Interface::menuPublishRebark() {
-
-}
-
-bool Interface::menuPublishReply() {
-=======
         if(_m->createBark(text)){
             cout << "Bark succesfully published" << endl;
         }
@@ -337,25 +281,11 @@ void Interface::menuPublishReply(int id) {
         }
     }
     return;
->>>>>>> Stashed changes
 
 }
 
 void Interface::menuTimeline() {
-<<<<<<< Updated upstream
 
-}
-
-void Interface::menuSelectPub() {
-
-}
-
-void Interface::menuFeed() {
-
-}
-
-void Interface::menuDeletePublication() {
-=======
     vector<Publication*> timeline;
     timeline = _m->getTimeline();
 
@@ -446,13 +376,10 @@ void Interface::menuDeletePublication(int id) {
         cout << "Delete operation cancel" << endl;
     }
     return;
->>>>>>> Stashed changes
 
 }
 
 void Interface::menuSettings() {
-<<<<<<< Updated upstream
-=======
     string prompt = "Settings:";
 
     // options
@@ -479,25 +406,10 @@ void Interface::menuSettings() {
             break;
     }
     return;
->>>>>>> Stashed changes
 
 }
 
 void Interface::menuSettingsEditEmail() {
-<<<<<<< Updated upstream
-
-}
-
-void Interface::menuSettingsEditBio() {
-
-}
-
-void Interface::menuSettingsEditUsername() {
-
-}
-
-void Interface::menuSettingsEditPassword() {
-=======
     string email;
     int input;
     cout << "Enter new Email" << endl;
@@ -593,14 +505,10 @@ void Interface::menuSettingsEditPassword() {
         cout << "Wrong password" << endl;
     }
     return;
->>>>>>> Stashed changes
 
 }
 
 void Interface::menuSearch() {
-<<<<<<< Updated upstream
-
-=======
     cout << "All users in BARKER:" << endl;
     for(int i=0; i< (int) _m->_users.size(); i++){
         cout << _m->getCurrentUser()->getUsername() << endl;
@@ -614,7 +522,6 @@ void Interface::menuSearch() {
         menuShowUser();
     }
     return;
->>>>>>> Stashed changes
 }
 
 void Interface::menuSearchResults() {
@@ -622,24 +529,6 @@ void Interface::menuSearchResults() {
 }
 
 void Interface::menuShowUser() {
-<<<<<<< Updated upstream
-
-}
-
-void Interface::menuFollowUser() {
-
-}
-
-void Interface::menuViewFollowersUser() {
-
-}
-
-void Interface::menuViewFollowingUser() {
-
-}
-
-void Interface::menuShowPubsUser() {
-=======
     string username;
 
     cout << "Enter username to visualize" << endl;
@@ -755,7 +644,6 @@ void Interface::menuShowPubsUser(int pos) {
         menuSelectPub(false);
     }
     return;
->>>>>>> Stashed changes
 
 }
 
