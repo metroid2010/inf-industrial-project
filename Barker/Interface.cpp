@@ -269,7 +269,7 @@ int Interface::menuMain() {
     cout << "Welcome to Bark " << _m->getCurrentUser()->getUsername() << endl;
 
     // options
-    vector<string> options = { "Publish Bark", "Show followed users' timeline", "Show Feed", "Search user", "View current followers", "Settings", "Logout" };
+    vector<string> options = { "Publish Bark", "Show followed users' timeline", "Show Feed", "Search user", "View current Followers and Following Users", "Settings", "Logout" };
     int input;
     input = optionMenu(options);
 
@@ -297,6 +297,8 @@ void Interface::menuPublishBark() {
         if(_m->createBark(text)){
             cout << "Bark succesfully published" << endl;
         }
+    }else{
+        cout << "Publication cancel" << endl;
     }
 }
 
@@ -323,6 +325,8 @@ void Interface::menuPublishRebark(int id) {
         if(_m->createRebark(id, text)){
             cout << "Rebark succesfully published" << endl;
         }
+    }else{
+        cout << "Publication cancel" << endl;
     }
     return;
 
@@ -351,6 +355,8 @@ void Interface::menuPublishReply(int id) {
         if(_m->createReply(id, text)){
             cout << "Reply succesfully published" << endl;
         }
+    }else{
+        cout << "Publication cancel" << endl;
     }
     return;
 
@@ -365,15 +371,17 @@ void Interface::menuTimeline() {
     timeline = _m->getTimeline();
 
     for(int i=0; i< (int) timeline.size(); i++){
-        cout << timeline[i]->getId() << endl;
+        cout << "Publication ID:" << timeline[i]->getId() << endl;
         cout << timeline[i]->getBarkPretty() << endl;
     }
 
-    // options
-    vector<string> options = {"Select Publication" , "Back to Main"};
-    int input = optionMenu(options);
-    if (input==0){
-        menuSelectPub(false);
+    if((int) timeline.size()>0){
+        // options
+        vector<string> options = {"Select Publication" , "Back to Main"};
+        int input = optionMenu(options);
+        if (input==0){
+            menuSelectPub(false);
+        }
     }
     return;
 }
@@ -428,15 +436,17 @@ void Interface::menuFeed() {
 
     //Show publications current user
     for(int i=0; i< (int) feed.size(); i++){
-        cout << feed[i]->getId() << endl;
-        cout << feed[i]->getBarkPretty();
+        cout << "Publication ID:" << feed[i]->getId() << endl;
+        cout << feed[i]->getBarkPretty() << endl;
     }
 
-    // options
-    vector<string> options = {"Select Publication", "Back to Main"};
-    int input = optionMenu(options);
-    if (input==0){
-        menuSelectPub(true);
+    if((int) feed.size()>0){
+        // options
+        vector<string> options = {"Select Publication", "Back to Main"};
+        int input = optionMenu(options);
+        if (input==0){
+            menuSelectPub(true);
+        }
     }
     return;
 
@@ -641,7 +651,7 @@ void Interface::menuShowUser() {
         cout << "Bio:" << _m->_users[position]->getBio() << endl;
 
         // options
-        vector<string> options = { "Follow User", "View User's Followers", "View User's Publications", "Back to Main"};
+        vector<string> options = { "Follow User", "View User's Followers and Following Users", "View User's Publications", "Back to Main"};
         int input;
         input = optionMenu(options);
         switch (input) {
@@ -682,10 +692,10 @@ void Interface::menuUnfollowUser(int pos) {
     // screen decorations
     cout << endl << "======Unfollow=User=====" << endl;
 
-    if(_m->unfollowUser(_m->_users[pos]->getUsername())){
+    if(_m->unfollowUser(_m->getCurrentUser()->getFollowing()[pos]->getUsername())){
         cout << "Unfollowed user succesfully"<< endl;
     }else{
-        cout << "Error trying to follow user"<< endl;
+        cout << "Error trying to unfollow user"<< endl;
     }
     return;
 }
@@ -693,10 +703,10 @@ void Interface::menuUnfollowUser(int pos) {
 void Interface::menuViewFollowersUser() {
 
     // screen decorations
-    cout << endl << "=====View=Followers=====" << endl;
+    cout << endl << "=====View=Followers=&=Following=======" << endl;
 
-    cout << _m->getCurrentUser()->getUsername() << " has " << _m->getCurrentUser()->getFollowers() << "number of followers" << endl;
-    cout << "The followers' usernames are:" << endl;
+    cout << _m->getCurrentUser()->getUsername() << " has " << _m->getCurrentUser()->getFollowers() << " number of followers" << endl;
+    cout << "The users you are following are:" << endl;
 
     for(int i=0; i< (int)_m->getCurrentUser()->getFollowing().size(); i++){
         cout << _m->getCurrentUser()->getFollowing()[i]->getUsername() << endl;
@@ -729,14 +739,14 @@ void Interface::menuViewFollowersUser() {
 void Interface::menuViewFollowingUser(int pos) {
 
     // screen decorations
-    cout << endl << "====View=Following======" << endl;
+    cout << endl << "=====View=Followers=&=Following=======" << endl;
 
-    cout << _m->_users[pos]->getUsername() << " has " << _m->_users[pos]->getFollowers() << "number of followers" << endl;
-    cout << "The followers' usernames are:" << endl;
+    cout << _m->_users[pos]->getUsername() << " has " << _m->_users[pos]->getFollowers() << " number of followers" << endl;
+    cout << "The users " << _m->_users[pos]->getFollowers() << " is following are:" << endl;
 
-    for(int i=0; i< (int)_m->_users[pos]->getFollowing().size(); i++){
-        cout << _m->_users[pos]->getFollowing()[i]->getUsername() << endl;
-    }
+        for(int i=0; i< (int)_m->_users[pos]->getFollowing().size(); i++){
+            cout << _m->_users[pos]->getFollowing()[i]->getUsername() << endl;
+        }
     return;
 
 }
@@ -752,8 +762,8 @@ void Interface::menuShowPubsUser(int pos) {
 
     //Show publications current user
     for(int i=0; i< (int) feed.size(); i++){
-        cout << "ID " << feed[i]->getId() << " - ";
-        cout << feed[i]->getBarkPretty();
+        cout << "Publication ID: " << feed[i]->getId() << " - ";
+        cout << feed[i]->getBarkPretty() << endl;
     }
 
     // options

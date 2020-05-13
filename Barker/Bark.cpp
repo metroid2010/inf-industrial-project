@@ -32,7 +32,7 @@ string Bark::getBark(){
 
 string Bark::getBarkPretty(){
     struct tm* timePretty = localtime((long*) &_time);
-    return _user->getUsername()+" - "+ asctime(timePretty) +":\n"+_text;
+    return _user->getUsername()+" - "+ asctime(timePretty) +":" +"\n"+_text;
 }
 
 int Bark::getType() {

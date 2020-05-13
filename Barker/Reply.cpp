@@ -40,7 +40,7 @@ string Reply::getBark(){
 
 string Reply::getBarkPretty(){
     struct tm* timePretty = localtime((long*) &_time);
-    return _user->getUsername()+" replied - "+ asctime(timePretty) +":\n===\n"+ _publication->getBark()+"\n===\n"+_text;
+    return _user->getUsername()+" replied - "+ asctime(timePretty) +":" + "\n===\n"+ _publication->getBarkPretty()+"\n===\n"+_text;
 }
 
 int Reply::getType() {
