@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include "Manager.hpp"
+#include <string>
 
 class Interface {
 

@@ -42,7 +42,7 @@ int Interface::optionMenu(vector<string> options) {
 
     // show options
     for ( int i = 0; i < (int) options.size(); i++ ) {
-        cout << "1- " << options[i] << endl;
+        cout << i << "- " << options[i] << endl;
     }
 
     // get option
@@ -68,50 +68,56 @@ void Interface::startInterface() {
     // this is the main function for the interface, which starts an interface and sets the flow that links the next functions
     int option;
     bool logged = false;
+
     do {
         option = menuLoginScreen();
         switch (option) {
             case 0:
                 if ( menuLogin() ) {
+
                     logged = true;
+
+                    // main loop
+                    int mainSelect;
+                    int loggedout = 1;
+
+                    do {
+                        mainSelect = menuMain();
+                        switch ( mainSelect ) {
+                            case 0:
+                                menuPublishBark();
+                                break;
+                            case 1:
+                                menuTimeline();
+                                break;
+                            case 2:
+                                menuFeed();
+                                break;
+                            case 3:
+                                menuSearch();
+                                break;
+                            case 4:
+                                menuViewFollowersUser();
+                            case 5:
+                                menuSettings();
+                                break;
+                            case 6:
+                                loggedout = menuLogout();
+                        }
+
+                    } while ( loggedout == 1 && _m->isLogged() ); // exit on user chose to logout
+
+                    logged = false;
                 }
                 break;
+
             case 1:
                 menuCreateUser();
                 break;
             case 2:
-                return;
+                return; // exit without login
         }
     } while ( !logged );
-
-    // main loop
-    int mainSelect;
-    int loggedout = 0;
-    do {
-        mainSelect = menuMain();
-        switch ( mainSelect ) {
-            case 0:
-                menuPublishBark();
-                break;
-            case 1:
-                menuTimeline();
-                break;
-            case 2:
-                menuFeed();
-                break;
-            case 3:
-                menuSearch();
-                break;
-            case 4:
-                menuViewFollowersUser();
-            case 5:
-                menuSettings();
-                break;
-            case 6:
-                loggedout = menuLogout();
-        }
-
-    } while ( loggedout == 0 && _m->isLogged() ); // exit on user chose to logout
 
     return;
 
@@ -138,9 +144,16 @@ bool Interface::menuLogin() {
     cout << "Email: ";
     cin >> email;
     cout << "Password: ";
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
 
-    return ( _m->login(email, password) );
+    if ( _m->login(email, password) ) {
+        cout << "Login successful!" << endl;
+        return true;
+    } else {
+        cout << "Wrong username or password" << endl;
+        return false;
+    }
 }
 
 void Interface::menuCreateUser() {
@@ -153,10 +166,12 @@ void Interface::menuCreateUser() {
     cout << "Email: ";
     cin >> email;
     cout << "Password: ";
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
     cout << "Username: ";
     cin >> username;
     cout << "Bio: ";
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, bio);
 
     if ( _m->createUser(email, password, username, bio) ) {
@@ -225,6 +240,7 @@ int Interface::menuMain() {
 void Interface::menuPublishBark() {
     string text;
     cout << "Text to bark: ";
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, text);
 
     // options
@@ -246,6 +262,7 @@ void Interface::menuPublishRebark(int id) {
     cout << _m->_pubs[position]->getBark() << endl;
 
     cout << "Text to Rebark: " << endl;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, text);
 
     // options
@@ -269,6 +286,7 @@ void Interface::menuPublishReply(int id) {
     cout << _m->_pubs[position]->getBark() << endl;
 
     cout << "Text to Reply: " << endl;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, text);
 
     // options
@@ -436,6 +454,7 @@ void Interface::menuSettingsEditBio() {
     string bio;
     int input;
     cout << "Enter new Bio" << endl;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, bio);
 
     // options
@@ -482,6 +501,7 @@ void Interface::menuSettingsEditPassword() {
     int input;
 
     cout << "Enter current password" << endl;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
 
     if(password==_m->getCurrentUser()->getPassword()){
