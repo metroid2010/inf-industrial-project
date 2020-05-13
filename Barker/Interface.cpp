@@ -106,6 +106,7 @@ void Interface::startInterface() {
                                 break;
                             case 4:
                                 menuViewFollowersUser();
+                                break;
                             case 5:
                                 menuSettings();
                                 break;
@@ -244,6 +245,18 @@ int Interface::menuLogout() {
     string prompt = "Are you sure you want to logout?";
     vector<string> options = { "Yes", "No" };
     input = optionMenu(options, prompt);
+    if ( input == 0 ) {
+        if ( _m-> logout() ){
+            cout << "Logged out" << endl;
+            return 0;
+        } else {
+            cout << "Error trying to log out" << endl;
+            return 1;
+        }
+    } else {
+        cout << "Logout cancelled" << endl;
+        return 1;
+    }
 
     return input;
 }
@@ -296,7 +309,7 @@ void Interface::menuPublishRebark(int id) {
     int position = _m->searchPub(id);
 
     cout << "Original Bark:" << endl;
-    cout << _m->_pubs[position]->getBark() << endl;
+    cout << _m->_pubs[position]->getBarkPretty() << endl;
 
     cout << "Text to Rebark: " << endl;
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
@@ -324,7 +337,7 @@ void Interface::menuPublishReply(int id) {
     int position = _m->searchPub(id);
 
     cout << "Original Bark:" << endl;
-    cout << _m->_pubs[position]->getBark() << endl;
+    cout << _m->_pubs[position]->getBarkPretty() << endl;
 
     cout << "Text to Reply: " << endl;
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
@@ -353,7 +366,7 @@ void Interface::menuTimeline() {
 
     for(int i=0; i< (int) timeline.size(); i++){
         cout << timeline[i]->getId() << endl;
-        cout << timeline[i]->getBark() << endl;
+        cout << timeline[i]->getBarkPretty() << endl;
     }
 
     // options
@@ -416,7 +429,7 @@ void Interface::menuFeed() {
     //Show publications current user
     for(int i=0; i< (int) feed.size(); i++){
         cout << feed[i]->getId() << endl;
-        cout << feed[i]->getBark();
+        cout << feed[i]->getBarkPretty();
     }
 
     // options
@@ -595,7 +608,7 @@ void Interface::menuSearch() {
 
     cout << "All users in BARKER:" << endl;
     for(int i=0; i< (int) _m->_users.size(); i++){
-        cout << _m->getCurrentUser()->getUsername() << endl;
+        cout << _m->_users[i]->getUsername() << endl;
     }
 
     int input;
@@ -733,14 +746,14 @@ void Interface::menuShowPubsUser(int pos) {
     // screen decorations
     cout << endl << "====View=Publications===" << endl;
 
-    cout << "The publications of " << _m->_users[pos]->getUsername() << "are:";
+    cout << "The publications of " << _m->_users[pos]->getUsername() << " are: " << endl;
     vector<Publication*> feed;
     feed = _m->getUserFeed(_m->_users[pos]->getUsername());
 
     //Show publications current user
     for(int i=0; i< (int) feed.size(); i++){
-        cout << feed[i]->getId() << endl;
-        cout << feed[i]->getBark();
+        cout << "ID " << feed[i]->getId() << " - ";
+        cout << feed[i]->getBarkPretty();
     }
 
     // options

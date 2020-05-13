@@ -37,6 +37,7 @@ public:
     virtual string getText()=0;
     virtual int getType()=0;
     virtual string getBark()=0;
+    virtual string getBarkPretty()=0;
     virtual ~Publication();
 
 };
