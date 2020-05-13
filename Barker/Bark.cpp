@@ -30,6 +30,11 @@ string Bark::getBark(){
     return _user->getUsername()+" - "+to_string(_time)+":\n"+_text;
 }
 
+string Bark::getBarkPretty(){
+    struct tm* timePretty = localtime((long*) &_time);
+    return _user->getUsername()+" - "+ asctime(timePretty) +":\n"+_text;
+}
+
 int Bark::getType() {
     return _type;
 }

@@ -27,6 +27,7 @@ public:
     void setRep(Publication* rep);
     string getText();
     string getBark();
+    string getBarkPretty();
     vector<Publication*> getRep();
     int getType();
     ~Bark();

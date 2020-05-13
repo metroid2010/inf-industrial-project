@@ -37,6 +37,11 @@ string Rebark::getBark(){
     return _user->getUsername()+" rebarked - "+to_string(_time)+":\n"+_text+"\n***\n"+ _publication->getBark()+"\n***";
 }
 
+string Rebark::getBarkPretty(){
+    struct tm* timePretty = localtime((long*) &_time);
+    return _user->getUsername()+" rebarked - "+ asctime(timePretty) +":\n"+_text+"\n***\n"+ _publication->getBark()+"\n***";
+}
+
 int Rebark::getType() {
     return _type;
 }

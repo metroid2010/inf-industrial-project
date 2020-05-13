@@ -12,6 +12,10 @@
 Interface::Interface() {}
 
 int Interface::optionMenu(vector<string> options, string prompt) {
+
+    // screen decorations
+    cout << "------------------------" << endl;
+
     // show prompt
     cout << prompt << endl;
 
@@ -36,6 +40,10 @@ int Interface::optionMenu(vector<string> options, string prompt) {
 }
 
 int Interface::optionMenu(vector<string> options) {
+
+    // screen decorations
+    cout << "------------------------" << endl;
+
     // show prompt
     string prompt = "Choose an option"; // default prompt
     cout << prompt << endl;
@@ -124,6 +132,10 @@ void Interface::startInterface() {
 }
 
 int Interface::menuLoginScreen() {
+
+    // screen decorations
+    cout << endl << "========================" << endl;
+
     // show login menu
 
     // options
@@ -136,6 +148,9 @@ int Interface::menuLoginScreen() {
 }
 
 bool Interface::menuLogin() {
+
+    // screen decorations
+    cout << endl << "=========Login==========" << endl;
 
     string email;
     string password;
@@ -157,6 +172,9 @@ bool Interface::menuLogin() {
 }
 
 void Interface::menuCreateUser() {
+
+    // screen decorations
+    cout << endl << "======Create=User=======" << endl;
 
     string email;
     string username;
@@ -182,6 +200,10 @@ void Interface::menuCreateUser() {
 }
 
 void Interface::menuDeleteUser() {
+
+    // screen decorations
+    cout << endl << "=======Delete=User======" << endl;
+
     string password;
     int input;
 
@@ -213,6 +235,9 @@ void Interface::menuDeleteUser() {
 
 int Interface::menuLogout() {
 
+    // screen decorations
+    cout << endl << "========Log=Out=========" << endl;
+
     int input;
 
     // options
@@ -224,6 +249,9 @@ int Interface::menuLogout() {
 }
 
 int Interface::menuMain() {
+
+    // screen decorations
+    cout << endl << "=======Main=Menu========" << endl;
 
     cout << "Welcome to Bark " << _m->getCurrentUser()->getUsername() << endl;
 
@@ -238,6 +266,11 @@ int Interface::menuMain() {
 
 
 void Interface::menuPublishBark() {
+
+    // screen decorations
+    cout << endl << "==========Bark==========" << endl;
+
+
     string text;
     cout << "Text to bark: ";
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
@@ -255,6 +288,10 @@ void Interface::menuPublishBark() {
 }
 
 void Interface::menuPublishRebark(int id) {
+
+    // screen decorations
+    cout << endl << "=========Rebark=========" << endl;
+
     string text;
     int position = _m->searchPub(id);
 
@@ -279,6 +316,10 @@ void Interface::menuPublishRebark(int id) {
 }
 
 void Interface::menuPublishReply(int id) {
+
+    // screen decorations
+    cout << endl << "=========Reply==========" << endl;
+
     string text;
     int position = _m->searchPub(id);
 
@@ -304,12 +345,15 @@ void Interface::menuPublishReply(int id) {
 
 void Interface::menuTimeline() {
 
+    // screen decorations
+    cout << endl << "=========Timeline=======" << endl;
+
     vector<Publication*> timeline;
     timeline = _m->getTimeline();
 
     for(int i=0; i< (int) timeline.size(); i++){
         cout << timeline[i]->getId() << endl;
-        cout << timeline[i]->getBark();
+        cout << timeline[i]->getBark() << endl;
     }
 
     // options
@@ -322,6 +366,10 @@ void Interface::menuTimeline() {
 }
 
 void Interface::menuSelectPub(bool allowdelete) {
+
+    // screen decorations
+    cout << endl << "===Select=Publication===" << endl;
+
     int id;
     int position=-1;
     cout << "Id Publication:";
@@ -358,6 +406,10 @@ void Interface::menuSelectPub(bool allowdelete) {
 }
 
 void Interface::menuFeed() {
+
+    // screen decorations
+    cout << endl << "=========Feed===========" << endl;
+
     vector<Publication*> feed;
     feed = _m->getUserFeed(_m->getCurrentUser()->getUsername());
 
@@ -378,6 +430,10 @@ void Interface::menuFeed() {
 }
 
 void Interface::menuDeletePublication(int id) {
+
+    // screen decorations
+    cout << endl << "===Delete=Publication===" << endl;
+
     int position;
     int input;
 
@@ -398,7 +454,11 @@ void Interface::menuDeletePublication(int id) {
 }
 
 void Interface::menuSettings() {
-    string prompt = "Settings:";
+
+    // screen decorations
+    cout << endl << "========Settings========" << endl;
+
+    string prompt = "Choose:";
 
     // options
     vector<string> options = { "Edit Email", "Edit Password", "Edit Username", "Edit Bio", "Delete Account", "Back to Main"};
@@ -529,6 +589,10 @@ void Interface::menuSettingsEditPassword() {
 }
 
 void Interface::menuSearch() {
+
+    // screen decorations
+    cout << endl << "=========Search=========" << endl;
+
     cout << "All users in BARKER:" << endl;
     for(int i=0; i< (int) _m->_users.size(); i++){
         cout << _m->getCurrentUser()->getUsername() << endl;
@@ -549,6 +613,10 @@ void Interface::menuSearchResults() {
 }
 
 void Interface::menuShowUser() {
+
+    // screen decorations
+    cout << endl << "=====Show=User==========" << endl;
+
     string username;
 
     cout << "Enter username to visualize" << endl;
@@ -556,8 +624,8 @@ void Interface::menuShowUser() {
     int position = _m->searchUser(username, "username");
     if (position!=-1){
         cout << "Username:" << _m->_users[position]->getUsername() << endl;
-        cout << "Username:" << _m->_users[position]->getEmail() << endl;
-        cout << "Username:" << _m->_users[position]->getBio() << endl;
+        cout << "Email:" << _m->_users[position]->getEmail() << endl;
+        cout << "Bio:" << _m->_users[position]->getBio() << endl;
 
         // options
         vector<string> options = { "Follow User", "View User's Followers", "View User's Publications", "Back to Main"};
@@ -585,6 +653,9 @@ void Interface::menuShowUser() {
 
 void Interface::menuFollowUser(int pos) {
 
+    // screen decorations
+    cout << endl << "======Follow=User=======" << endl;
+
     if(_m->followUser(_m->_users[pos]->getUsername())){
         cout << "Now you are following " << _m->_users[pos]->getUsername() << endl;
     }else{
@@ -595,6 +666,9 @@ void Interface::menuFollowUser(int pos) {
 
 void Interface::menuUnfollowUser(int pos) {
 
+    // screen decorations
+    cout << endl << "======Unfollow=User=====" << endl;
+
     if(_m->unfollowUser(_m->_users[pos]->getUsername())){
         cout << "Unfollowed user succesfully"<< endl;
     }else{
@@ -604,6 +678,10 @@ void Interface::menuUnfollowUser(int pos) {
 }
 
 void Interface::menuViewFollowersUser() {
+
+    // screen decorations
+    cout << endl << "=====View=Followers=====" << endl;
+
     cout << _m->getCurrentUser()->getUsername() << " has " << _m->getCurrentUser()->getFollowers() << "number of followers" << endl;
     cout << "The followers' usernames are:" << endl;
 
@@ -636,6 +714,10 @@ void Interface::menuViewFollowersUser() {
 }
 
 void Interface::menuViewFollowingUser(int pos) {
+
+    // screen decorations
+    cout << endl << "====View=Following======" << endl;
+
     cout << _m->_users[pos]->getUsername() << " has " << _m->_users[pos]->getFollowers() << "number of followers" << endl;
     cout << "The followers' usernames are:" << endl;
 
@@ -647,6 +729,10 @@ void Interface::menuViewFollowingUser(int pos) {
 }
 
 void Interface::menuShowPubsUser(int pos) {
+
+    // screen decorations
+    cout << endl << "====View=Publications===" << endl;
+
     cout << "The publications of " << _m->_users[pos]->getUsername() << "are:";
     vector<Publication*> feed;
     feed = _m->getUserFeed(_m->_users[pos]->getUsername());

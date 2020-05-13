@@ -24,6 +24,7 @@ public:
     void setPublication(Publication* publication);
     Publication* getPublication();
     string getBark();
+    string getBarkPretty();
     int getType();
     ~Rebark();
 
