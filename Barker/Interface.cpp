@@ -696,7 +696,7 @@ void Interface::menuShowUser() {
                 return;
         }
     }else{
-            cout << "Username: " << username << "not found";
+            cout << "Username: " << username << " not found";
     }
     return;
 
