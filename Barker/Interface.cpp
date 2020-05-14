@@ -58,8 +58,10 @@ int Interface::optionMenu(vector<string> options) {
     do {
         cout << "$> ";
         cin >> input;
-        if ( cin.fail() || input < 0 || input > options.size() ) {
+        if ( !cin.good() || input < 0 || ( input > options.size() - 1 ) ) {
             cout << "Option not valid, try again" << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n'); // sanitize our inputs! flush and ignore characters in cin
         } else {
             break; // we got a valid option
         }

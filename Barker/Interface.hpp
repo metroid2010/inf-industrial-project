@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Manager.hpp"
 #include <string>
+#include <climits>
 
 class Interface {
 
