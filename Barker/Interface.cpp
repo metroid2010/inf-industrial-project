@@ -167,7 +167,8 @@ bool Interface::menuLogin() {
 
     // show login prompt
     cout << "Email: ";
-    cin >> email;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, email);
     cout << "Password: ";
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
@@ -176,7 +177,7 @@ bool Interface::menuLogin() {
         cout << "Login successful!" << endl;
         return true;
     } else {
-        cout << "Wrong username or password" << endl;
+        cout << "Wrong email or password" << endl;
         return false;
     }
 }
@@ -192,12 +193,14 @@ void Interface::menuCreateUser() {
     string password;
 
     cout << "Email: ";
-    cin >> email;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, email);
     cout << "Password: ";
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
     cout << "Username: ";
-    cin >> username;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, username);
     cout << "Bio: ";
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, bio);
@@ -218,6 +221,7 @@ void Interface::menuDeleteUser() {
     int input;
 
     cout << "Enter current password" << endl;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
 
     if(password==_m->getCurrentUser()->getPassword()){
@@ -523,7 +527,8 @@ void Interface::menuSettingsEditEmail() {
     string email;
     int input;
     cout << "Enter new Email" << endl;
-    cin >> email;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, email);
 
     // options
     string prompt = "Confirm change Email to " + email + "?";
@@ -570,7 +575,8 @@ void Interface::menuSettingsEditUsername() {
     string username;
     int input;
     cout << "Enter new Username" << endl;
-    cin >> username;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, username);
 
     // options
     string prompt = "Confirm change username to " + username + "?";
@@ -598,7 +604,8 @@ void Interface::menuSettingsEditPassword() {
 
     if(password==_m->getCurrentUser()->getPassword()){
         cout << "Enter new password" << endl;
-        cin >> newpassword;
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, password);
 
         // options
         string prompt = "Confirm change Password";
@@ -652,7 +659,8 @@ void Interface::menuShowUser() {
     string username;
 
     cout << "Enter username to visualize" << endl;
-    cin >> username;
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    getline(cin, username);
     int position = _m->searchUser(username, "username");
     if (position!=-1){
         cout << "Username:" << _m->_users[position]->getUsername() << endl;
@@ -729,7 +737,8 @@ void Interface::menuViewFollowersUser() {
     input = optionMenu(options);
     if(input==0){
         cout << "Enter username to unfollow:" << endl;
-        cin >> username;
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, username);
         for(int i=0; i< (int)_m->getCurrentUser()->getFollowing().size(); i++){
                 if(username== _m->getCurrentUser()->getFollowing()[i]->getUsername()){
                     position=i;
