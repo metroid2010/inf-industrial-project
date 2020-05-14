@@ -192,18 +192,29 @@ void Interface::menuCreateUser() {
     string bio;
     string password;
 
-    cout << "Email: ";
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
-    getline(cin, email);
-    cout << "Password: ";
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
-    getline(cin, password);
-    cout << "Username: ";
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
-    getline(cin, username);
-    cout << "Bio: ";
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
-    getline(cin, bio);
+    do {
+        cout << "Email: ";
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, email);
+    } while ( email == "");
+
+    do {
+        cout << "Password: ";
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, password);
+    } while ( password == "");
+
+    do {
+        cout << "Username: ";
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, username);
+    } while ( username == "");
+
+    do {
+        cout << "Bio: ";
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        getline(cin, bio);
+    } while ( email == "");
 
     if ( _m->createUser(email, password, username, bio) ) {
         cout << "User account created" << endl;
