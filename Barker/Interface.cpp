@@ -77,6 +77,7 @@ void Interface::startInterface() {
     int option;
     bool logged = false;
 
+    // this loop allows the program to get back to login screen on logout from main menu
     do {
         option = menuLoginScreen();
         switch (option) {
@@ -123,7 +124,13 @@ void Interface::startInterface() {
             case 1:
                 menuCreateUser();
                 break;
-            case 2:
+            case 2: // load from file
+                menuLoadFromDisk();
+                break;
+            case 3:
+                menuSaveToDisk();
+                break;
+            case 4:
                 return; // exit without login
         }
     } while ( !logged );
@@ -140,7 +147,7 @@ int Interface::menuLoginScreen() {
     // show login menu
 
     // options
-    vector<string> options = { "Login", "Sign in", "Exit" };
+    vector<string> options = { "Login", "Sign in", "Load from File", "Save state to file", "Exit" };
     cout << "Welcome to Barker!" << endl;
     int input;
     input = optionMenu(options);
@@ -776,4 +783,53 @@ void Interface::menuShowPubsUser(int pos) {
 
 }
 
+void Interface::menuSaveToDisk() {
 
+    // screen decorations
+    cout << endl << "=======Save=To=Disk=====" << endl;
+
+    // using Manager::saveToFile
+    string prompt = "Save Barker state to disk?";
+    vector<string> options = { "Yes", "No" };
+    int input = optionMenu(options, prompt);
+
+    // path to file, hardcoded name in same directory as executable
+    string path = "barker.data";
+
+    if ( input == 0 ){
+        if ( _m->saveToFile(path) ) {
+            cout << "Data saved as " << path << endl;
+        } else {
+            cout << "Error saving " << path << endl;
+        }
+    } else {
+        cout << "Save operation cancelled" << endl;
+    }
+
+}
+
+void Interface::menuLoadFromDisk() {
+
+    // screen decorations
+    cout << endl << "=====Load=From=Disk=====" << endl;
+
+    // path to file, hardcoded name in same directory as executable
+    string path = "barker.data";
+
+    // using Manager::loadFromFile
+    string prompt = "Load Barker state from disk? (file named " + path + ")";
+    vector<string> options = { "Yes", "No" };
+    int input = optionMenu(options, prompt);
+
+    if ( input == 0 ){
+        if ( _m->loadFromFile(path) ) {
+            cout << "Data loaded succesfully from " << path << endl;
+        } else {
+            cout << "Error loading from " << path << endl;
+            cout << "Check file exists and is readable" << endl;
+        }
+    } else {
+        cout << "Load operation cancelled" << endl;
+    }
+
+}

@@ -51,6 +51,8 @@ public:
     void menuUnfollowUser(int pos);
     void menuViewFollowingUser(int pos);
     void menuShowPubsUser(int pos);
+    void menuSaveToDisk();
+    void menuLoadFromDisk();
 
 };
 
