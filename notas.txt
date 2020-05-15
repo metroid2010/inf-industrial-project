@@ -3,7 +3,8 @@ Mejoras implementadas:
 - Mostrar el timeline del usuario ordenado cronológicamente: se ordena con publication._time creciente en getTimeline, con función auxiliar compByTime
 - Cuando un bark se elimina, rebark y replies to ese bark se eliminan: Bark._rep guarda las referencias a ese Bark, ver Bark::setRep, Bark::getRep, Manager::deletePublication
 - Pedir confirmación antes de borrar una cuenta de usuario, se pide en el método menuDeleteUser() de la interfaz.
+- Se pueden realizar barks/rebarks de otro bark/rebark como si se tratara de un bark
 
-Mejoras por implementar
-
-- Añadir sobrecarga de operador
+Interfaz:
+- Navegable por menús numerados
+- Implementadas todas las funciones que permiten los métodos de Manager
