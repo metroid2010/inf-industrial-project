@@ -312,7 +312,7 @@ void Interface::menuPublishBark() {
 
 
     string text;
-    cout << "Text to bark: ";
+    cout << "Text to bark: " << endl;
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, text);
 
@@ -623,7 +623,7 @@ void Interface::menuSettingsEditPassword() {
     if(password==_m->getCurrentUser()->getPassword()){
         cout << "Enter new password" << endl;
         cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
-        getline(cin, password);
+        getline(cin, newpassword);
 
         // options
         string prompt = "Confirm change Password";
