@@ -495,7 +495,11 @@ void Interface::menuDeletePublication(int id) {
     vector<string> options = { "Yes", "No"};
     input = optionMenu(options, prompt);
     if(input==0){
-        _m->deletePublication(position);
+        if(_m->deletePublication(position)){
+            cout << "Publication succesfully deleted" << endl;
+        }else{
+            cout << "Publication not deleted" << endl;
+        }
     }else{
         cout << "Delete operation cancel" << endl;
     }
@@ -774,7 +778,7 @@ void Interface::menuViewFollowingUser(int pos) {
     cout << endl << "=====View=Followers=&=Following=======" << endl;
 
     cout << _m->_users[pos]->getUsername() << " has " << _m->_users[pos]->getFollowers() << " number of followers" << endl;
-    cout << "The users " << _m->_users[pos]->getFollowers() << " is following are:" << endl;
+    cout << "The usernames " << _m->_users[pos]->getUsername() << " is following are:" << endl;
 
         for(int i=0; i< (int)_m->_users[pos]->getFollowing().size(); i++){
             cout << _m->_users[pos]->getFollowing()[i]->getUsername() << endl;
