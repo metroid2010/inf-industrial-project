@@ -36,6 +36,7 @@ int Interface::optionMenu(vector<string> options, string prompt) {
         }
     } while ( true );
 
+    cin.clear();
     return input;
 }
 
@@ -67,6 +68,7 @@ int Interface::optionMenu(vector<string> options) {
         }
     } while ( true );
 
+    cin.clear();
     return input;
 }
 
@@ -170,7 +172,7 @@ bool Interface::menuLogin() {
     cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, email);
     cout << "Password: ";
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+    //cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     getline(cin, password);
 
     if ( _m->login(email, password) ) {
@@ -196,25 +198,26 @@ void Interface::menuCreateUser() {
         cout << "Email: ";
         cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
         getline(cin, email);
+        //cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     } while ( email == "");
 
     do {
         cout << "Password: ";
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
         getline(cin, password);
+        //cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
     } while ( password == "");
 
     do {
         cout << "Username: ";
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        //cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
         getline(cin, username);
     } while ( username == "");
 
     do {
         cout << "Bio: ";
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
+        //cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n') ;
         getline(cin, bio);
-    } while ( email == "");
+    } while ( bio == "");
 
     if ( _m->createUser(email, password, username, bio) ) {
         cout << "User account created" << endl;
