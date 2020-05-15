@@ -12,8 +12,9 @@
 
 Reply::Reply(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
-    _publication = publication;
+    setPublication(publication );
     _type=2;
+
 
 }
 
