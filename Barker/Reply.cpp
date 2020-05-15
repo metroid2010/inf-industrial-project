@@ -12,10 +12,8 @@
 
 Reply::Reply(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
-    setPublication(publication );
+    setPublication(publication);
     _type=2;
-
-
 }
 
 string Reply::getText(){
@@ -32,7 +30,7 @@ Publication* Reply::getPublication(){
 
 void Reply::setPublication(Publication* publication){
     _publication=publication;
-    dynamic_cast<Bark*>(_publication)->setRep(this); // downcast Publication* to Bark*
+    _publication->setRep(this); // link to original publication
 }
 
 string Reply::getBark(){
@@ -46,6 +44,14 @@ string Reply::getBarkPretty(){
 
 int Reply::getType() {
     return _type;
+}
+
+void Reply::setRep(Publication *rep) {
+    _rep.push_back(rep);
+}
+
+vector<Publication*> Reply::getRep(){
+    return _rep;
 }
 
 Reply::~Reply() {}

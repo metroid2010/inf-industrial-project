@@ -11,9 +11,8 @@
 
 Rebark::Rebark(int id, ulong time, Publication* publication, PublicUserData* user, string text):Publication(id, time,  user){
     _text=text;
-    setPublication(publication );;
+    setPublication(publication);
     _type=1;
-
 }
 
 string Rebark::getText(){
@@ -28,10 +27,17 @@ Publication* Rebark::getPublication(){
     return _publication;
 }
 
+void Rebark::setRep(Publication *rep) {
+    _rep.push_back(rep);
+}
+
+vector<Publication*> Rebark::getRep(){
+    return _rep;
+}
+
 void Rebark::setPublication(Publication* publication){
     _publication=publication;
-    dynamic_cast<Bark*>(_publication)->setRep(this); // downcast Publication* to Bark*
-
+    _publication->setRep(this); // link to original publication
 }
 
 string Rebark::getBark(){
