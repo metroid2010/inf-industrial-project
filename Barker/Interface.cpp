@@ -31,6 +31,8 @@ int Interface::optionMenu(vector<string> options, string prompt) {
         cin >> input;
         if ( cin.fail() || input < 0 || input > options.size() ) {
             cout << "Option not valid, try again" << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n'); // sanitize our inputs! flush and ignore characters in cin
         } else {
             break; // we got a valid option
         }
