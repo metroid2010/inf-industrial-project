@@ -24,7 +24,10 @@ public:
     void setPublication(Publication* publication);
     Publication* getPublication();
     string getBark();
+    string getBarkPretty();
     int getType();
+    void setRep(Publication* rep);
+    vector<Publication*> getRep();
     ~Rebark();
 
 };

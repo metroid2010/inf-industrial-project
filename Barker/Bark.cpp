@@ -26,16 +26,21 @@ void Bark::setRep(Publication *rep) {
     _rep.push_back(rep);
 }
 
+vector<Publication*> Bark::getRep(){
+    return _rep;
+}
+
 string Bark::getBark(){
     return _user->getUsername()+" - "+to_string(_time)+":\n"+_text;
 }
 
-int Bark::getType() {
-    return _type;
+string Bark::getBarkPretty(){
+    struct tm* timePretty = localtime((long*) &_time);
+    return _user->getUsername()+" - "+ asctime(timePretty) +":" +"\n"+_text;
 }
 
-vector<Publication*> Bark::getRep(){
-    return _rep;
+int Bark::getType() {
+    return _type;
 }
 
 Bark::~Bark() {}

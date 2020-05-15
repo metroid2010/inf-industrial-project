@@ -24,6 +24,8 @@ using namespace std;
 
 class Manager {
 
+friend class Interface;
+
 private:
     vector<User*> _users;
     int _currentUser;

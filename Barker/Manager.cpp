@@ -426,6 +426,13 @@ bool Manager::deletePublication(int id) {
     if ( pos == -1 ){
         return false;
     }
+    if ( _currentUser != -1 ) {
+        // user logged in
+        //check user is removing own publication
+        if(_users[_currentUser]->getUsername() != _pubs[id]->getUser()->getUsername()){
+            return false;
+        }
+    }
 
     // if publication is a bark, check if it has references and delete them
     if ( _pubs[id]->getType() == 0 ) {
