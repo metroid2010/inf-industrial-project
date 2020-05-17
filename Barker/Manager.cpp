@@ -429,21 +429,21 @@ bool Manager::deletePublication(int id) {
     if ( _currentUser != -1 ) {
         // user logged in
         //check user is removing own publication
-        if(_users[_currentUser]->getUsername() != _pubs[id]->getUser()->getUsername()){
+        if(_users[_currentUser]->getUsername() != _pubs[pos]->getUser()->getUsername()){
             return false;
         }
     }
 
     // if publication is a bark, check if it has references and delete them
-    if ( _pubs[id]->getType() == 0 ) {
-        Bark* b = dynamic_cast<Bark*>( _pubs[id] );
+    if ( _pubs[pos]->getType() == 0 ) {
+        Bark* b = dynamic_cast<Bark*>( _pubs[pos] );
         for ( int i = 0; i < (int) b->getRep().size(); i++ ) {
             deletePublication( b->getRep()[i]->getId() ); // recursive fun here
         }
     }
 
     // remove pointer in _pubs
-    _pubs.erase( _pubs.begin() + id );
+    _pubs.erase( _pubs.begin() + pos );
 
     // remove pointer in owner user
     _pubs[id]->getUser()->removePublication(id);

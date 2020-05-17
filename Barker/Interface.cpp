@@ -61,7 +61,7 @@ int Interface::optionMenu(vector<string> options) {
     do {
         cout << "$> ";
         cin >> input;
-        if ( !cin.good() || input < 0 || ( input > options.size() - 1 ) ) {
+        if ( !cin.good() || input < 0 || ( input > (options.size() - 1) ) ) {
             cout << "Option not valid, try again" << endl;
             cin.clear();
             cin.ignore(INT_MAX, '\n'); // sanitize our inputs! flush and ignore characters in cin
@@ -497,7 +497,7 @@ void Interface::menuDeletePublication(int id) {
     vector<string> options = { "Yes", "No"};
     input = optionMenu(options, prompt);
     if(input==0){
-        if(_m->deletePublication(position)){
+        if(_m->deletePublication(id)){
             cout << "Publication succesfully deleted" << endl;
         }else{
             cout << "Publication not deleted" << endl;
